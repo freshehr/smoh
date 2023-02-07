@@ -1,0 +1,268 @@
+archetype (adl_version=1.4; uid=04958152-79fb-3b08-95d6-0ea4976f3ba5)
+	openEHR-EHR-OBSERVATION.waist_hip.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"mag. Biljana Prinčič">
+				["organisation"] = <"Marand d.o.o., Ljubljana, Slovenija">
+				["email"] = <"biljana.princic@marand.si">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"12/10/2007">
+		["name"] = <"Heather Leslie">
+		["organisation"] = <"Ocean Informatics">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Ian McNicoll, Ocean Informatics, UK", ...>
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"Za beleženje obsega bokov in pasu ter razmerja pas/bok
+">
+			keywords = <"pas","boki">
+			use = <"Za beleženje obsega bokov in pasu ter razmerja pas/bok
+">
+			misuse = <"Za zapisovanje drugih dolžinskih mer pacienta">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record the abdominal/waist (or girth) and hip circumference and waist/hip ratio.
+
+
+">
+			keywords = <"waist","hip","abdomen","trunk">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Definitions of measurement methodology differ, particularly for abdominal/waist circumference , though the WHO definition is most common. Where other methods are used, these should be documented in protocol.">
+			misuse = <"Do not use to record Fetal Abdominal Circumference, normally obtained via ultrasonography.">
+		>
+	>
+	other_details = <
+		["references"] = <"WHO Anthropometery Guidlines http://whqlibdoc.who.int/trs/WHO_TRS_854_(annexes).pdf
+Australian Government Metadata online registry http://meteor.aihw.gov.au">
+		["MD5-CAM-1.0.1"] = <"CE51AADAF9BDD961E3361CC282FCDA8D">
+		["build_uid"] = <"c02901e8-401a-3687-a8d1-6543cdaa7e67">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Waist, abdominal and hip circumference
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_LIST[at0003] matches {    -- List
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Waist/abdominal circumference
+										value matches {
+											C_DV_QUANTITY <
+												property = <[openehr::122]>
+												list = <
+													["1"] = <
+														units = <"cm">
+														magnitude = <|0.0..999.0|>
+														precision = <|1|>
+													>
+													["2"] = <
+														units = <"in">
+														magnitude = <|0.0..999.0|>
+														precision = <|1|>
+													>
+												>
+											>
+										}
+									}
+									ELEMENT[at0005] occurrences matches {0..1} matches {    -- Hip circumference
+										value matches {
+											C_DV_QUANTITY <
+												property = <[openehr::122]>
+												list = <
+													["1"] = <
+														units = <"cm">
+														magnitude = <|0.0..999.0|>
+														precision = <|1|>
+													>
+													["2"] = <
+														units = <"in">
+														magnitude = <|0.0..999.0|>
+														precision = <|1|>
+													>
+												>
+											>
+										}
+									}
+									ELEMENT[at0008] occurrences matches {0..1} matches {    -- Minimum waist circumference
+										value matches {
+											C_DV_QUANTITY <
+												property = <[openehr::122]>
+												list = <
+													["1"] = <
+														units = <"cm">
+														magnitude = <|0.0..999.0|>
+														precision = <|1|>
+													>
+													["2"] = <
+														units = <"in">
+														magnitude = <|0.0..999.0|>
+														precision = <|1|>
+													>
+												>
+											>
+										}
+									}
+									ELEMENT[at0007] occurrences matches {0..1} matches {    -- Maximum abdominal circumference
+										value matches {
+											C_DV_QUANTITY <
+												property = <[openehr::122]>
+												list = <
+													["1"] = <
+														units = <"cm">
+														magnitude = <|0.0..999.0|>
+														precision = <|1|>
+													>
+													["2"] = <
+														units = <"in">
+														magnitude = <|>=0.0|>
+														precision = <|1|>
+													>
+												>
+											>
+										}
+									}
+									ELEMENT[at0006] occurrences matches {0..1} matches {    -- Waist:hip ratio
+										value matches {
+											DV_PROPORTION matches {
+												numerator matches {|0.0..1.0|}
+												type matches {1}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0009] matches {    -- Tree
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0010] occurrences matches {0..1} matches {    -- Waist/abdominal measurement method
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Waist, abdominal and hip circumference">
+					description = <"The waist (or girth), abdominal and hip circumference.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"Timing event">
+				>
+				["at0003"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Waist/abdominal circumference">
+					description = <"Defined by WHO as the circumference of the trunk measured midway between the inferior margin of the last rib and the crest of the ilium in a horizontal plane. Equivalent to WHO 'Abdominal circumference'.">
+				>
+				["at0005"] = <
+					text = <"Hip circumference">
+					description = <"Measurement of body circumference at the widest point of the buttocks.">
+				>
+				["at0006"] = <
+					text = <"Waist:hip ratio">
+					description = <"Ratio of waist/abdominal circumference to hip circumference .">
+				>
+				["at0007"] = <
+					text = <"Maximum abdominal circumference">
+					description = <"The circumference of the widest part of the trunk  at the end of normal expiration.">
+				>
+				["at0008"] = <
+					text = <"Minimum waist circumference">
+					description = <"The circumference of the narrowest part of the trunk at the end of normal expiration. Equivalent to WHO 'Waist circumference'">
+				>
+				["at0009"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0010"] = <
+					text = <"Waist/abdominal measurement method">
+					description = <"Details of methodology used to measure abdominal/waist circumference. ">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Obseg pasu, trebuha in bokov">
+					description = <"Obseg pasu, trebuha in bokov">
+				>
+				["at0001"] = <
+					text = <"*Event Series(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"*Any event(en)">
+					description = <"*Timing event(en)">
+				>
+				["at0003"] = <
+					text = <"*List(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0004"] = <
+					text = <"Pas/terbuh">
+					description = <"Obseg pasu">
+				>
+				["at0005"] = <
+					text = <"Boki">
+					description = <"Obseg bokov">
+				>
+				["at0006"] = <
+					text = <"Razmerje">
+					description = <"Razmerje med pasom in boki">
+				>
+				["at0007"] = <
+					text = <"Maksimalni obseg trebušnega dela">
+					description = <"Obseg najširšega dela  v trebušnem delu telesa.">
+				>
+				["at0008"] = <
+					text = <"Minimalni obseg trebušnega dela">
+					description = <"Obseg najožjega dela v trebušnem delu telesa.  Ustreza z opredelitvijo WHO \"obseg pasu\".">
+				>
+				["at0009"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0010"] = <
+					text = <"Metoda merjenja obsega abdominalnega dela">
+					description = <"Podatki o metodi meritve obsega trebuha, pasu in bokov">
+				>
+			>
+		>
+	>
