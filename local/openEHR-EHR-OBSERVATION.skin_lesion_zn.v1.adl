@@ -1,0 +1,274 @@
+archetype (adl_version=1.4; uid=53c6509c-d1f3-3feb-89e1-acbcca2e891d)
+	openEHR-EHR-OBSERVATION.skin_lesion_zn.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["date"] = <"13/06/2010">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record a simple skin lesion assessment in accordance with ZN documentation.">
+			keywords = <"skin","lesion">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"1D2DB10FD9702CD800247374576B32C8">
+		["build_uid"] = <"56ce7418-1804-389b-87e0-feca84ba6dff">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Skin lesion assessment
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Redness
+										value matches {
+											0|[local::at0013],
+											1|[local::at0014],
+											2|[local::at0015],
+											3|[local::at0016]
+										}
+									}
+									ELEMENT[at0005] occurrences matches {0..1} matches {    -- Other colour
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0006] occurrences matches {0..1} matches {    -- Result of pressure ulcer
+										value matches {
+											DV_BOOLEAN matches {*}
+										}
+									}
+									ELEMENT[at0007] occurrences matches {0..1} matches {    -- Oedema
+										value matches {
+											0|[local::at0017],
+											1|[local::at0018],
+											2|[local::at0019],
+											3|[local::at0020]
+										}
+									}
+									ELEMENT[at0008] occurrences matches {0..1} matches {    -- Moist
+										value matches {
+											0|[local::at0021],
+											1|[local::at0022],
+											2|[local::at0023],
+											3|[local::at0024]
+										}
+									}
+									ELEMENT[at0010] occurrences matches {0..1} matches {    -- Flaky
+										value matches {
+											0|[local::at0026],
+											1|[local::at0027],
+											2|[local::at0028],
+											3|[local::at0029]
+										}
+									}
+									ELEMENT[at0034] occurrences matches {0..1} matches {    -- Baked!!!
+										value matches {
+											0|[local::at0035],
+											1|[local::at0036],
+											2|[local::at0037],
+											3|[local::at0038]
+										}
+									}
+									ELEMENT[at0025] occurrences matches {0..1} matches {    -- Plaque present
+										value matches {
+											DV_BOOLEAN matches {*}
+										}
+									}
+									ELEMENT[at0011] occurrences matches {0..1} matches {    -- Itchy
+										value matches {
+											0|[local::at0030],
+											1|[local::at0031],
+											2|[local::at0032],
+											3|[local::at0033]
+										}
+									}
+									ELEMENT[at0012] occurrences matches {0..1} matches {    -- Pain
+										value matches {
+											DV_BOOLEAN matches {*}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Skin lesion assessment">
+					description = <"Simple skin lesion assessment from ZN documentation.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Redness">
+					description = <"The degree of skin redness.">
+				>
+				["at0005"] = <
+					text = <"Other colour">
+					description = <"Other skin colour present.">
+				>
+				["at0006"] = <
+					text = <"Result of pressure ulcer">
+					description = <"Does the lesion result from a pressure ulcer?">
+				>
+				["at0007"] = <
+					text = <"Oedema">
+					description = <"Degree of oe">
+				>
+				["at0008"] = <
+					text = <"Moist">
+					description = <"*">
+				>
+				["at0010"] = <
+					text = <"Flaky">
+					description = <"*">
+				>
+				["at0011"] = <
+					text = <"Itchy">
+					description = <"*">
+				>
+				["at0012"] = <
+					text = <"Pain">
+					description = <"Is pain present?">
+				>
+				["at0013"] = <
+					text = <"None">
+					description = <"*">
+				>
+				["at0014"] = <
+					text = <"Slight">
+					description = <"*">
+				>
+				["at0015"] = <
+					text = <"Moderate">
+					description = <"*">
+				>
+				["at0016"] = <
+					text = <"Severe">
+					description = <"*">
+				>
+				["at0017"] = <
+					text = <"None">
+					description = <"*">
+				>
+				["at0018"] = <
+					text = <"Slight">
+					description = <"*">
+				>
+				["at0019"] = <
+					text = <"Moderate">
+					description = <"*">
+				>
+				["at0020"] = <
+					text = <"Severe">
+					description = <"*">
+				>
+				["at0021"] = <
+					text = <"Dry">
+					description = <"*">
+				>
+				["at0022"] = <
+					text = <"Slightly moist">
+					description = <"*">
+				>
+				["at0023"] = <
+					text = <"Moderately moist">
+					description = <"*">
+				>
+				["at0024"] = <
+					text = <"Very moist">
+					description = <"*">
+				>
+				["at0025"] = <
+					text = <"Plaque present">
+					description = <"*">
+				>
+				["at0026"] = <
+					text = <"None">
+					description = <"*">
+				>
+				["at0027"] = <
+					text = <"Mild">
+					description = <"*">
+				>
+				["at0028"] = <
+					text = <"Moderate">
+					description = <"*">
+				>
+				["at0029"] = <
+					text = <"Severe">
+					description = <"*">
+				>
+				["at0030"] = <
+					text = <"None">
+					description = <"*">
+				>
+				["at0031"] = <
+					text = <"Mild">
+					description = <"*">
+				>
+				["at0032"] = <
+					text = <"Moderate">
+					description = <"*">
+				>
+				["at0033"] = <
+					text = <"Severe">
+					description = <"*">
+				>
+				["at0034"] = <
+					text = <"Baked!!!">
+					description = <"*">
+				>
+				["at0035"] = <
+					text = <"None">
+					description = <"*">
+				>
+				["at0036"] = <
+					text = <"Mild">
+					description = <"*">
+				>
+				["at0037"] = <
+					text = <"Moderate">
+					description = <"*">
+				>
+				["at0038"] = <
+					text = <"Severe">
+					description = <"*">
+				>
+			>
+		>
+	>
