@@ -1,0 +1,75 @@
+archetype (adl_version=1.4; uid=bf6ef94f-8c6f-341c-8986-da0088ddb849)
+	openEHR-EHR-COMPOSITION.summary.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"?">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"09/03/2011">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"*To record a persistent record of some aspect of the health status of the patient e.g Vaccination status, Allergies
+(en)">
+			copyright = <"*(en)">
+			use = <"*(en)">
+			misuse = <"*(en)">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record a persistent record of some aspect of the health status of the patient e.g Vaccination status, Allergies
+">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"489B2CF6E12C56E77ECEF18B0F1F123E">
+		["build_uid"] = <"d1c8c8b2-23fd-301b-a032-bb76136c878b">
+	>
+
+definition
+	COMPOSITION[at0000] matches {    -- Patient summary
+		category matches {
+			DV_CODED_TEXT matches {
+				defining_code matches {
+					[openehr::431]
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Patient summary">
+					description = <"A snapshot summary of the vaccination record.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Patient summary(en)">
+					description = <"*A snapshot summary of the vaccination record.(en)">
+				>
+			>
+		>
+	>
