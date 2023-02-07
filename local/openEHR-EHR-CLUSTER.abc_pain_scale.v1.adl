@@ -1,0 +1,189 @@
+archetype (adl_version=1.4; uid=34795ead-b01c-354d-8e47-dc7a3c967abf)
+	openEHR-EHR-CLUSTER.abc_pain_scale.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"mag. Biljana Prinčič">
+				["organisation"] = <"Marand d.o.o., Ljubljana, Slovenia">
+				["email"] = <"biljana.prinčič@marand.si">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"19.10.2010">
+		["name"] = <"Uroš Rajkovič">
+		["organisation"] = <"Faculty of organizational sciences, University of Maribor, Slovenia">
+		["email"] = <"uros.rajkovic@fov.uni-mb.si">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Biljana Prinčič, biljana.princic@marand.si, Marand d.o.o., Slovenia","Ian McNicoll, Ocean Informatics, UK">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"Za oceno bolečine pri novorojenčkih">
+			keywords = <"ABC lestvica","bolečina","Paro-Štih lestvica","bolečina pri novorojenčkih","ocena bolečine">
+			use = <"ZA oceno bolečine pri otrocih, ki še ne govorijo">
+			misuse = <"Se ne uporablja za oceno bolečine pri starejših otrocih">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"A pain scale for infants.">
+			keywords = <"ABC pain scale","pain scale","baby","newborn">
+			use = <"Used to assess level of pain in non speaking babies.">
+			misuse = <"Not to be used with older patients or those who can speak.">
+		>
+	>
+	other_details = <
+		["references"] = <"Bellieni C, Bagnoli F, Sisto R, et al. Development and validation of the ABC pain scale for healthy full-term babies. Acta Paediatrica. 2005;94(10):1432-1436.">
+		["MD5-CAM-1.0.1"] = <"D0A02201C3159C0EE39A3A389418568A">
+		["build_uid"] = <"72d987ff-5659-3980-921c-15715f8c0f0d">
+	>
+
+definition
+	CLUSTER[at0000] matches {    -- ABC pain scale
+		items cardinality matches {1..*; unordered} matches {
+			ELEMENT[at0005] occurrences matches {0..1} matches {    -- First cry acuteness
+				value matches {
+					0|[local::at0006],
+					2|[local::at0007]
+				}
+			}
+			ELEMENT[at0008] occurrences matches {0..1} matches {    -- Burst rhythmicity
+				value matches {
+					0|[local::at0009],
+					2|[local::at0010]
+				}
+			}
+			ELEMENT[at0011] occurrences matches {0..1} matches {    -- Cry constancy
+				value matches {
+					0|[local::at0012],
+					1|[local::at0013],
+					2|[local::at0014]
+				}
+			}
+			ELEMENT[at0015] occurrences matches {0..1} matches {    -- ABC pain score
+				value matches {
+					DV_COUNT matches {
+						magnitude matches {|0..6|}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"ABC pain scale">
+					description = <"Pain scale used for babies.">
+				>
+				["at0005"] = <
+					text = <"First cry acuteness">
+					description = <"Acuteness of the first cry.">
+				>
+				["at0006"] = <
+					text = <"< 400 Hz">
+					description = <"Low pitch">
+				>
+				["at0007"] = <
+					text = <">= 400 Hz">
+					description = <"High pitch">
+				>
+				["at0008"] = <
+					text = <"Burst rhythmicity">
+					description = <"Rhythmicity of the crying bout">
+				>
+				["at0009"] = <
+					text = <"Not rhythmic">
+					description = <"The crying bout is not rythmic.">
+				>
+				["at0010"] = <
+					text = <"Rhythmic bursts">
+					description = <"The crying bout is rythmic.">
+				>
+				["at0011"] = <
+					text = <"Cry constancy">
+					description = <"Cry constancy.">
+				>
+				["at0012"] = <
+					text = <"No cry">
+					description = <"No constancy in crying, brief moan rather than crying.">
+				>
+				["at0013"] = <
+					text = <"Not constant">
+					description = <"More than brief moan, but not constant.">
+				>
+				["at0014"] = <
+					text = <"Constant">
+					description = <"Crying is constant in time.">
+				>
+				["at0015"] = <
+					text = <"ABC pain score">
+					description = <"Sum of scores for 3 criteria">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Lestvica Paro-Štih">
+					description = <"Lestvica Paro-Štih za dojenčke, ki ne govorijo">
+				>
+				["at0005"] = <
+					text = <"Višina">
+					description = <"Višina začetnega joka">
+				>
+				["at0006"] = <
+					text = <"< 400 Hz">
+					description = <"Nizek">
+				>
+				["at0007"] = <
+					text = <">= 400 Hz">
+					description = <"Visok">
+				>
+				["at0008"] = <
+					text = <"Ritmičnost">
+					description = <"Ritmičnost izbruhov joka">
+				>
+				["at0009"] = <
+					text = <"Ne ritmični izbruhi">
+					description = <"Ne ritmični izbruhi joka">
+				>
+				["at0010"] = <
+					text = <"Ritmični izbruhi">
+					description = <"Ritmični izbruhi joka">
+				>
+				["at0011"] = <
+					text = <"Trajnost">
+					description = <"Trajnost joka">
+				>
+				["at0012"] = <
+					text = <"Kratkotrajen">
+					description = <"Kratkotrajen jok">
+				>
+				["at0013"] = <
+					text = <"Trajno teženje">
+					description = <"Novorojenček trajno teži">
+				>
+				["at0014"] = <
+					text = <"Trajen jok">
+					description = <"Novorojenček konstantno joka">
+				>
+				["at0015"] = <
+					text = <"Rezultat ocene">
+					description = <"Rezultat vseh treh kriterijev">
+				>
+			>
+		>
+	>
