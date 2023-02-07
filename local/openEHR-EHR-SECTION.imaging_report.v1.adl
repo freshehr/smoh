@@ -1,0 +1,73 @@
+archetype (adl_version=1.4; uid=4f5e67eb-61cb-3de3-ad04-99f4378461c3)
+	openEHR-EHR-SECTION.imaging_report.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["name"] = <"">
+	>
+	lifecycle_state = <"0">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"612251419C70C0CC65D5DF184ABA85CF">
+		["build_uid"] = <"0fa0feba-0536-3f93-aa1c-d7ca0d2ce46f">
+	>
+
+definition
+	SECTION[at0000] matches {    -- Imaging report
+		items cardinality matches {0..*; unordered} matches {
+			SECTION[at0003] occurrences matches {0..1} matches {    -- Imaging request
+				items cardinality matches {0..*; unordered} matches {
+					allow_archetype ENTRY[at0004] occurrences matches {0..*} matches {    -- Imaging request
+						include
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+			SECTION[at0002] occurrences matches {0..*} matches {    -- Imaging result group
+				items cardinality matches {0..*; unordered} matches {
+					allow_archetype ENTRY[at0001] occurrences matches {0..*} matches {    -- Imaging result
+						include
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Imaging report">
+					description = <"General structure for an imaging report.">
+				>
+				["at0001"] = <
+					text = <"Imaging result">
+					description = <"*">
+				>
+				["at0002"] = <
+					text = <"Imaging result group">
+					description = <"*">
+				>
+				["at0003"] = <
+					text = <"Imaging request">
+					description = <"*">
+				>
+				["at0004"] = <
+					text = <"Imaging request">
+					description = <"*">
+				>
+			>
+		>
+	>
