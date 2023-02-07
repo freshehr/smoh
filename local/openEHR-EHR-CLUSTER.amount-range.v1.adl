@@ -1,0 +1,134 @@
+archetype (adl_version=1.4; uid=9b9d9e72-bec4-3731-aa02-bfa6f7a0a5b9)
+	openEHR-EHR-CLUSTER.amount-range.v1
+specialize
+	openEHR-EHR-CLUSTER.amount.v1
+
+concept
+	[at0000.1]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["application"] = <"Adl Designer">
+			>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"10/11/2010">
+		["name"] = <"Sam Heard">
+		["organisation"] = <"NEHTA">
+		["email"] = <"sam.heard@oceaninformatics.com">
+	>
+	lifecycle_state = <"CommitteeDraft">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To describe the amount of a substance as a range for use in Medication order. Allows structured statement such as take 1 - 2 tablets every four hours as required.">
+			keywords = <"amount","dose","dosing","range","maximum dose","minimum dose">
+			use = <"In INSTRUCTION medication as an order.">
+			misuse = <"Should only be used in an order, not administration or dispensing.">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"4CA19D2C2E4D238BAC1C00DF700170D2">
+		["build_uid"] = <"b3f72e2b-247f-32fb-a2ab-86f70b5aae44">
+	>
+
+definition
+	CLUSTER[at0000.1] matches {    -- Amount of medication as a range
+		items cardinality matches {2..*; unordered} matches {
+			ELEMENT[at0001.1] matches {    -- Upper quantity
+				value matches {
+					DV_COUNT matches {
+						magnitude matches {|>=1|}
+					}
+					DV_PROPORTION matches {*}
+				}
+			}
+			ELEMENT[at0.3] matches {    -- Lower quantity
+				value matches {
+					DV_QUANTITY matches {*}
+					DV_PROPORTION matches {*}
+				}
+			}
+			ELEMENT[at0002] occurrences matches {0..1} matches {    -- Dose unit
+				value matches {
+					DV_CODED_TEXT matches {*}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0.3"] = <
+					text = <"Lower quantity">
+					description = <"The lower range of amount.">
+				>
+				["at0000"] = <
+					text = <"The amount of substance">
+					description = <"The amount of a substance for medication order, administration, dispensing etc.">
+				>
+				["at0000.1"] = <
+					text = <"Amount of medication as a range">
+					description = <"The amount of a substance as a range (upper and lower) for medication order, administration, dispensing etc.">
+				>
+				["at0001"] = <
+					text = <"Quantity">
+					description = <"The upper range of quantity, number or proportion.">
+				>
+				["at0001.1"] = <
+					text = <"Upper quantity">
+					description = <"The upper range of quantity, number or proportion.">
+				>
+				["at0002"] = <
+					text = <"Dose unit">
+					description = <"The dose unit of this amount.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0.3"] = <
+					text = <"*Lower quantity(en)">
+					description = <"*The lower range of amount.(en)">
+				>
+				["at0000"] = <
+					text = <"*The amount of substance(en)">
+					description = <"*The amount of a substance for medication order, administration, dispensing etc.(en)">
+				>
+				["at0000.1"] = <
+					text = <"*Amount of medication as a range(en)">
+					description = <"*The amount of a substance as a range (upper and lower) for medication order, administration, dispensing etc.(en)">
+				>
+				["at0001"] = <
+					text = <"*Quantity(en)">
+					description = <"*The upper range of quantity, number or proportion.(en)">
+				>
+				["at0001.1"] = <
+					text = <"*Upper quantity(en)">
+					description = <"*The upper range of quantity, number or proportion.(en)">
+				>
+				["at0002"] = <
+					text = <"*Dose unit(en)">
+					description = <"*The dose unit of this amount.(en)">
+				>
+			>
+		>
+	>
