@@ -1,0 +1,107 @@
+archetype (adl_version=1.4; uid=da949ea0-3b68-37db-998a-32620a101e16)
+	openEHR-EHR-EVALUATION.summary_context.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["application"] = <"Adl Designer">
+			>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"01/04/2011">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"0">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"ECBEA9C8454C2EFC556E0FDC5B323562">
+		["build_uid"] = <"80c18d8f-72f9-35ec-a7e9-72199ce14aa3">
+	>
+
+definition
+	EVALUATION[at0000] matches {    -- Summary context
+		data matches {
+			ITEM_TREE[at0001] matches {    -- Tree
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0003] occurrences matches {0..1} matches {    -- Date last reviewed
+						value matches {
+							DV_DATE_TIME matches {*}
+						}
+					}
+					ELEMENT[at0004] occurrences matches {0..1} matches {    -- Comment
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Summary context">
+					description = <"Contextual information regarding a persistent ' summary-style' composition e.g.">
+				>
+				["at0001"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0003"] = <
+					text = <"Date last reviewed">
+					description = <"The date at which the summary was last clinically assessed or reviewed.">
+				>
+				["at0004"] = <
+					text = <"Comment">
+					description = <"A comment about the summary content review. ">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Summary context(en)">
+					description = <"*Contextual information regarding a persistent ' summary-style' composition e.g.(en)">
+				>
+				["at0001"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0003"] = <
+					text = <"*Date last reviewed(en)">
+					description = <"*The date at which the summary was last clinically assessed or reviewed.(en)">
+				>
+				["at0004"] = <
+					text = <"*Comment(en)">
+					description = <"*A comment about the summary content review. (en)">
+				>
+			>
+		>
+	>
