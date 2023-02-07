@@ -1,0 +1,246 @@
+archetype (adl_version=1.4; uid=97ad8e82-e8c1-3218-9e14-cc89cf09cc1c)
+	openEHR-EHR-OBSERVATION.special_clinical_status.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"?">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"21.3.2011">
+		["name"] = <"Anže Droljc">
+		["organisation"] = <"Marand inženiring d.o.o.">
+		["email"] = <"anze.droljc@marand.si">
+	>
+	lifecycle_state = <"Published">
+	other_contributors = <"Klaudija Đorem", ...>
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"Arhetip se uporablja za shranjevanje podatkov o specialnem kliničnem statusu pacienta.">
+			copyright = <"*(en)">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"The archetype is to be used for gathering special clinical status.">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"E483B240EEB6ADA66AFC3CE7478B16D1">
+		["build_uid"] = <"75e6444d-24a2-3e4a-9b31-e1a0a15a7611">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Special clinical status
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Eyes
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0005] occurrences matches {0..1} matches {    -- Ears
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0006] occurrences matches {0..1} matches {    -- Nose
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0007] occurrences matches {0..1} matches {    -- Neck
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0008] occurrences matches {0..1} matches {    -- Chest and respiratory system
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0009] occurrences matches {0..1} matches {    -- Heart and coronary system
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0010] occurrences matches {0..1} matches {    -- Throat and oral cavity
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0011] occurrences matches {0..1} matches {    -- Skin and lymph nodes
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0012] occurrences matches {0..1} matches {    -- Abdomen and genitals
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0013] occurrences matches {0..1} matches {    -- Muscle and skeleton
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0014] occurrences matches {0..1} matches {    -- Neurology and development
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Special clinical status">
+					description = <"Arcehtype is used for gathering data regarding special clinical status">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Eyes">
+					description = <"*">
+				>
+				["at0005"] = <
+					text = <"Ears">
+					description = <"*">
+				>
+				["at0006"] = <
+					text = <"Nose">
+					description = <"*">
+				>
+				["at0007"] = <
+					text = <"Neck">
+					description = <"*">
+				>
+				["at0008"] = <
+					text = <"Chest and respiratory system">
+					description = <"*">
+				>
+				["at0009"] = <
+					text = <"Heart and coronary system">
+					description = <"*">
+				>
+				["at0010"] = <
+					text = <"Throat and oral cavity">
+					description = <"*">
+				>
+				["at0011"] = <
+					text = <"Skin and lymph nodes">
+					description = <"*">
+				>
+				["at0012"] = <
+					text = <"Abdomen and genitals">
+					description = <"*">
+				>
+				["at0013"] = <
+					text = <"Muscle and skeleton">
+					description = <"*">
+				>
+				["at0014"] = <
+					text = <"Neurology and development">
+					description = <"*">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Specialni klinični status">
+					description = <"*">
+				>
+				["at0001"] = <
+					text = <"*Event Series(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"*Any event(en)">
+					description = <"**(en)">
+				>
+				["at0003"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0004"] = <
+					text = <"Oči">
+					description = <"**(en)">
+				>
+				["at0005"] = <
+					text = <"Ušesa">
+					description = <"**(en)">
+				>
+				["at0006"] = <
+					text = <"Nos">
+					description = <"**(en)">
+				>
+				["at0007"] = <
+					text = <"Vrat">
+					description = <"**(en)">
+				>
+				["at0008"] = <
+					text = <"Prsni koš in dihala">
+					description = <"**(en)">
+				>
+				["at0009"] = <
+					text = <"Srce in obtočila">
+					description = <"**(en)">
+				>
+				["at0010"] = <
+					text = <"Ustna votlina in žrelo">
+					description = <"*">
+				>
+				["at0011"] = <
+					text = <"Koža in bezgavke">
+					description = <"*">
+				>
+				["at0012"] = <
+					text = <"Trebuh in spolovilo">
+					description = <"*">
+				>
+				["at0013"] = <
+					text = <"Mišice in skelet">
+					description = <"*">
+				>
+				["at0014"] = <
+					text = <"Nevrologija in razvoj">
+					description = <"*">
+				>
+			>
+		>
+	>
