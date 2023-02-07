@@ -1,0 +1,275 @@
+archetype (adl_version=1.4; uid=823f3f49-8201-38f3-9c69-df24c1161e96)
+	openEHR-EHR-EVALUATION.goal_set-zn.v1
+specialize
+	openEHR-EHR-EVALUATION.goal_set.v1
+
+concept
+	[at0000.1]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"mag. Biljana Prinčič">
+				["organisation"] = <"Marand d.o.o., Ljubljana, Slovenija">
+				["email"] = <"biljana.princic@marand.si">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"23/04/2006">
+		["name"] = <"Sam Heard">
+		["organisation"] = <"Ocean Informatics">
+		["email"] = <"sam.heard@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"Za zapisovanje ciljev v procesu zdravljenja
+">
+			keywords = <"Cilj", ...>
+			copyright = <"*copyright (c) 2010 openEHR Foundation(en)">
+			use = <"Za zapisovanje ciljev v procesu zdravljenja">
+			misuse = <"Se ne uporablja za naročanje intervencij">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"For recording general goals and specific measurable (and perhaps incremental) targets towards that goal.">
+			keywords = <"target", ...>
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"7F13E3EFF4F16FDE26F239D7CD3EAB01">
+		["build_uid"] = <"722fbbf3-78b8-38f5-ba1a-e842c15e1329">
+	>
+
+definition
+	EVALUATION[at0000.1] matches {    -- Goal setting
+		data matches {
+			ITEM_TREE[at0001] matches {    -- Tree
+				items cardinality matches {1..*; ordered} matches {
+					ELEMENT[at0002] matches {    -- Desired goal
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0011] occurrences matches {0..1} matches {    -- Date goal established
+						value matches {
+							DV_DATE_TIME matches {*}
+						}
+					}
+					ELEMENT[at0012] occurrences matches {0..1} matches {    -- Comment
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0003] occurrences matches {0..1} matches {    -- Proposed interval of achievement
+						value matches {
+							DV_INTERVAL<DV_DATE_TIME> matches {
+								upper matches {
+									DV_DATE_TIME matches {*}
+								}
+								lower matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+						}
+					}
+					ELEMENT[at0013] occurrences matches {0..1} matches {    -- Intent
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0.14,    -- To improve
+									at0.15,    -- To stabilise
+									at0.16]    -- To support
+								}
+							}
+						}
+					}
+					CLUSTER[at0005] occurrences matches {0..*} matches {    -- Specific target
+						items cardinality matches {1..4; ordered} matches {
+							ELEMENT[at0007] occurrences matches {0..1} matches {    -- Target measurement
+								value matches {
+									DV_INTERVAL<DV_COUNT> matches {
+										upper matches {
+											DV_COUNT matches {*}
+										}
+										lower matches {
+											DV_COUNT matches {*}
+										}
+									}
+									DV_INTERVAL<DV_QUANTITY> matches {
+										upper matches {
+											C_DV_QUANTITY <
+												property = <[openehr::0]>											>
+										}
+										lower matches {
+											C_DV_QUANTITY <
+												property = <[openehr::0]>											>
+										}
+									}
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0010] occurrences matches {0..1} matches {    -- Comment
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0008] occurrences matches {0..1} matches {    -- Proposed target interval
+								value matches {
+									DV_INTERVAL<DV_DATE_TIME> matches {
+										upper matches {
+											DV_DATE_TIME matches {*}
+										}
+										lower matches {
+											DV_DATE_TIME matches {*}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0.14"] = <
+					text = <"To improve">
+					description = <"*">
+				>
+				["at0.15"] = <
+					text = <"To stabilise">
+					description = <"*">
+				>
+				["at0.16"] = <
+					text = <"To support">
+					description = <"*">
+				>
+				["at0000"] = <
+					text = <"Goal setting">
+					description = <"A future health state that is agreed to by the person">
+				>
+				["at0000.1"] = <
+					text = <"Goal setting">
+					description = <"A future health state that is agreed to by the person. Aligned with ZN documentation.">
+				>
+				["at0001"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Desired goal">
+					description = <"The health state that is to be achieved. Normally a brief term.">
+				>
+				["at0003"] = <
+					text = <"Proposed interval of achievement">
+					description = <"The proposed date interval of achievement.">
+				>
+				["at0005"] = <
+					text = <"Specific target">
+					description = <"Specific target outcome.">
+				>
+				["at0007"] = <
+					text = <"Target measurement">
+					description = <"The range of values within the target">
+				>
+				["at0008"] = <
+					text = <"Proposed target interval">
+					description = <"The proposed date interval for achieving the target">
+				>
+				["at0010"] = <
+					text = <"Comment">
+					description = <"A textual comment on the desired target.">
+				>
+				["at0011"] = <
+					text = <"Date goal established">
+					description = <"The date that this goal was established.">
+				>
+				["at0012"] = <
+					text = <"Comment">
+					description = <"Further textual commetn on the desired goal.">
+				>
+				["at0013"] = <
+					text = <"Intent">
+					description = <"The overall intent of the goal e.g curative, palliative, condition improvement, condition/therapeutic monitoring, personal support.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0.14"] = <
+					text = <"Za izboljšanje">
+					description = <"Za izboljšanje">
+				>
+				["at0.15"] = <
+					text = <"Za ohranitev stanja">
+					description = <"Za ohranitev stanja ">
+				>
+				["at0.16"] = <
+					text = <"Za podporo">
+					description = <"Za podporo">
+				>
+				["at0000"] = <
+					text = <"Opredelitev cilja">
+					description = <"Opredelitev cilja">
+				>
+				["at0000.1"] = <
+					text = <"Opredelitev cilja">
+					description = <"Cilj procesa ZN">
+				>
+				["at0001"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"Želeni cilj">
+					description = <"Želeni cilj">
+				>
+				["at0003"] = <
+					text = <"Časovni interval">
+					description = <"Časovni interval">
+				>
+				["at0005"] = <
+					text = <"Vmesni cilj">
+					description = <"Vmesni cilj">
+				>
+				["at0007"] = <
+					text = <"Vrednost">
+					description = <"Vrednost">
+				>
+				["at0008"] = <
+					text = <"Časovni interval">
+					description = <"Časovni interval">
+				>
+				["at0010"] = <
+					text = <"Opomba">
+					description = <"Opomba">
+				>
+				["at0011"] = <
+					text = <"Datum opredelitve cilja">
+					description = <"Datum postavitve cilja">
+				>
+				["at0012"] = <
+					text = <"Opombe">
+					description = <"Opombe">
+				>
+				["at0013"] = <
+					text = <"Namen">
+					description = <"Namen cilja">
+				>
+			>
+		>
+	>
