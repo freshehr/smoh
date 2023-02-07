@@ -1,0 +1,455 @@
+archetype (adl_version=1.4; uid=077d8e96-f029-3909-b952-0ac5075afe2e)
+	openEHR-EHR-OBSERVATION.fluid_output-vomiting.v1
+specialize
+	openEHR-EHR-OBSERVATION.fluid_output.v1
+
+concept
+	[at0000.1]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"mag. Biljana Prinčič">
+				["organisation"] = <"Marand, Ljubljana, Slovenia">
+				["email"] = <"biljana.princic@marand.si">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"11/11/2009">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Sam Heard, Ocean Informatics, Australia","Heather Leslie, Ocean Informatics, Australia","Biljana Prinčič, Marand d.o.o. Slovenia","Uroš Rajkovič, Univerza v Mariboru, Fakulteta za organizacijske vede Kranj">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"
+
+Za beleženje ugotovitev glede izmerjenega ali ocenjenega bruhanja.">
+			keywords = <"bruhanje","izloček","bljuvanje">
+			use = <"Za beleženje ugotovitev glede izmerjenega ali ocenjenega bruhanja kot del zdravstvene nege.
+MLahko se uporabi tudi za opis podrobnosti glede ocene bruhanja
+
+Uporablja se s kombinacijo CLUSTER.bodily_output.v1, ki služi za opisovanbje telesnih izločkov.">
+			misuse = <"Se ne uporablja za merjenje vnosa tekočin.">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record findings of, and measurements of actual or estimated vomiting.">
+			keywords = <"production","output","fluid","fluid balance","input output","io","vomit","emesis">
+			use = <"Use to record findings and measurements of vomiting as part of routine nursing care.
+May be used for descriptive assessments of an output or to record detailed amounts and totals over a period.
+
+Used in combination with CLUSTER.bodily_output.v1 to describe the bodily substance involved.">
+			misuse = <"Do not use to record fluid input.">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"8E8F7FE973BA204858BBD85FB81B830B">
+		["build_uid"] = <"1b6d6400-8833-3f97-bb77-1ddc62196d7a">
+	>
+
+definition
+	OBSERVATION[at0000.1] matches {    -- Vomiting
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..*} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- List
+								items cardinality matches {1..*; unordered} matches {
+									allow_archetype CLUSTER[at0016.1] occurrences matches {0..1} matches {    -- Vomit detail
+										include
+											archetype_id/value matches {/openEHR-EHR-CLUSTER\.bodily_substance-vomit(-[a-zA-Z0-9_]+)*\.v1/}
+									}
+									ELEMENT[at0.32] occurrences matches {0..1} matches {    -- Character
+										value matches {
+											DV_CODED_TEXT matches {
+												defining_code matches {
+													[local::
+													at0.40,    -- Normal
+													at0.41,    -- Projectile
+													at0.42,    -- Effortless
+													at0.43,    -- Retching
+													at0.44,    -- Infant spilling
+													at0.50]    -- With effort
+												}
+											}
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0.51] occurrences matches {0..1} matches {    -- Additional description
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+						}
+						state matches {
+							ITEM_TREE[at0.33] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0.34] occurrences matches {0..1} matches {    -- Relation to feeding
+										value matches {
+											DV_CODED_TEXT matches {
+												defining_code matches {
+													[local::
+													at0.35,    -- During feeding
+													at0.36,    -- Immediately after feeding.
+													at0.37,    -- Up to 1 hour after feeding
+													at0.38,    -- Up to 2 hours after feeding
+													at0.39]    -- More than 2  hours after feeding
+												}
+											}
+										}
+									}
+									ELEMENT[at0.45] occurrences matches {0..1} matches {    -- Datetime last fed
+										value matches {
+											DV_DATE_TIME matches {*}
+										}
+									}
+									ELEMENT[at0.46] occurrences matches {0..1} matches {    -- Time since last fed
+										value matches {
+											DV_DURATION matches {
+												value matches {PDTHMS/|>=PT0S|}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					INTERVAL_EVENT[at0006] occurrences matches {0..*} matches {    -- Total
+						math_function matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[openehr::148]
+								}
+							}
+						}
+						data matches {
+							use_node ITEM_TREE /data[at0001]/events[at0002]/data[at0003]
+						}
+						state matches {
+							use_node ITEM_TREE /data[at0001]/events[at0002]/state[at0.33]
+						}
+					}
+					INTERVAL_EVENT[at0007] occurrences matches {0..*} matches {    -- Actual
+						math_function matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[openehr::640]
+								}
+							}
+						}
+						data matches {
+							use_node ITEM_TREE /data[at0001]/events[at0002]/data[at0003]
+						}
+						state matches {
+							use_node ITEM_TREE /data[at0001]/events[at0002]/state[at0.33]
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0008] matches {    -- List
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0031] occurrences matches {0..1} matches {    -- Measurement precision
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0018,    -- Estimated
+									at0019,    -- Measured
+									at0020]    -- Stated
+								}
+							}
+						}
+					}
+					allow_archetype CLUSTER[at0028] occurrences matches {0..1} matches {    -- Measurement device
+						include
+							archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1/}
+						exclude
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0.32"] = <
+					text = <"Character">
+					description = <"Character of the vomiting.">
+				>
+				["at0.33"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0.34"] = <
+					text = <"Relation to feeding">
+					description = <"The time relationship of the vomiting to feeding. Genrally applicable to neonates and infants.">
+				>
+				["at0.35"] = <
+					text = <"During feeding">
+					description = <"Vomiting occues during feeding.">
+				>
+				["at0.36"] = <
+					text = <"Immediately after feeding.">
+					description = <"Vomiting occurs immediately after feeding.">
+				>
+				["at0.37"] = <
+					text = <"Up to 1 hour after feeding">
+					description = <"Vomiting occurs up to 1 hour after feeding.">
+				>
+				["at0.38"] = <
+					text = <"Up to 2 hours after feeding">
+					description = <"Vomiting occurs up to 2 hours after feeding.">
+				>
+				["at0.39"] = <
+					text = <"More than 2  hours after feeding">
+					description = <"Vomiting occurs more than 2  hours after feeding.">
+				>
+				["at0.40"] = <
+					text = <"Normal">
+					description = <"The vomiting is of a normal or usual character.">
+				>
+				["at0.41"] = <
+					text = <"Projectile">
+					description = <"The vomiting is projectile in nature.">
+				>
+				["at0.42"] = <
+					text = <"Effortless">
+					description = <"The vomiting appears effortless.">
+				>
+				["at0.43"] = <
+					text = <"Retching">
+					description = <"The subject is retching.">
+				>
+				["at0.44"] = <
+					text = <"Infant spilling">
+					description = <"Infant regurgitation/ vomiting.">
+				>
+				["at0.45"] = <
+					text = <"Datetime last fed">
+					description = <"The date and or time that the subject last fed.">
+				>
+				["at0.46"] = <
+					text = <"Time since last fed">
+					description = <"The time elapsed since the subject last fed.">
+				>
+				["at0.50"] = <
+					text = <"With effort">
+					description = <"Vomiting with effort">
+				>
+				["at0.51"] = <
+					text = <"Additional description">
+					description = <"Additional description">
+				>
+				["at0000"] = <
+					text = <"Fluid output">
+					description = <"Recording of findings and measurement (or estimation) of bodily output such as fluid output and defaecation.">
+				>
+				["at0000.1"] = <
+					text = <"Vomiting">
+					description = <"Findings related to vomiting.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"The estimation of fluid output without specifying the period of time.">
+				>
+				["at0003"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0006"] = <
+					text = <"Total">
+					description = <"For recording total fluid output over a period (may transcend a number of interval or point in time records).">
+				>
+				["at0007"] = <
+					text = <"Actual">
+					description = <"For recording the fluid output over a period of time when this will later be totalled.">
+				>
+				["at0008"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0016"] = <
+					text = <"Fluid detail">
+					description = <"Details of the fluid or substance observed being observed.">
+				>
+				["at0016.1"] = <
+					text = <"Vomit detail">
+					description = <"Details of the vomit observed.">
+				>
+				["at0018"] = <
+					text = <"Estimated">
+					description = <"The fluid volume has been estimated.">
+				>
+				["at0019"] = <
+					text = <"Measured">
+					description = <"The fluid volume has been directly measured.">
+				>
+				["at0020"] = <
+					text = <"Stated">
+					description = <"The fluid output has been stated.">
+				>
+				["at0028"] = <
+					text = <"Measurement device">
+					description = <"Details of device used to measure the fluid output.">
+				>
+				["at0031"] = <
+					text = <"Measurement precision">
+					description = <"Records the level of precision of the fluid output observation.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0.32"] = <
+					text = <"Oblika">
+					description = <"Oblika bruhanja">
+				>
+				["at0.33"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0.34"] = <
+					text = <"Nastopilo">
+					description = <"Pojav bruhanja glede na čas zadnjega hranjeja, ponavadi je to pomembno pri neonatalnih otokih.">
+				>
+				["at0.35"] = <
+					text = <"Med hranjenjem">
+					description = <"Bruhanje je nastalo med hranjenjem">
+				>
+				["at0.36"] = <
+					text = <"Takoj po hranjenju">
+					description = <"Bruhanje je nastalo takoj po hranjenju">
+				>
+				["at0.37"] = <
+					text = <"Do 1 ure po hranjenju">
+					description = <"Bruhanje je nastalo 1 uro po hranjenju">
+				>
+				["at0.38"] = <
+					text = <"Do 2 uri po hranjenju">
+					description = <"Bruhanje je nastalo 2 uri po hranjenju">
+				>
+				["at0.39"] = <
+					text = <"Več kot 2 uri po hranjenju">
+					description = <"Bruhanje je nastalo več kot 2 uri po hranjenju">
+				>
+				["at0.40"] = <
+					text = <"Normalno/običajno">
+					description = <"Bruhanje je normalno/običajno">
+				>
+				["at0.41"] = <
+					text = <"V loku">
+					description = <"Bruhanje v loku">
+				>
+				["at0.42"] = <
+					text = <"Brez napora">
+					description = <"Bruhanje izgleda brez napora">
+				>
+				["at0.43"] = <
+					text = <"Bljuvanje">
+					description = <"Bruhanje ima obliko bljuvanja">
+				>
+				["at0.44"] = <
+					text = <"Polivanje pri dojenčku">
+					description = <"Polivanje pri dojenčku">
+				>
+				["at0.45"] = <
+					text = <"Datum in čas zadnjega obroka">
+					description = <"Datum in čas zadnjega hranjenja pacienta">
+				>
+				["at0.46"] = <
+					text = <"Čas od zadnjega obroka">
+					description = <"Čas, ki je potekel od zadnjega obroka pacienta">
+				>
+				["at0.50"] = <
+					text = <"Z naporom">
+					description = <"Bruhanje z naporom">
+				>
+				["at0.51"] = <
+					text = <"Dodaten opis">
+					description = <"Dodaten opis bruhanja">
+				>
+				["at0000"] = <
+					text = <"*Fluid output(en)">
+					description = <"*Recording of findings and measurement (or estimation) of bodily output such as fluid output and defaecation.(en)">
+				>
+				["at0000.1"] = <
+					text = <"Opis bruhanja">
+					description = <"Opis bruhanja">
+				>
+				["at0001"] = <
+					text = <"*Event Series(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*The estimation of fluid output without specifying the period of time.(en)">
+				>
+				["at0003"] = <
+					text = <"*List(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0006"] = <
+					text = <"*Total(en)">
+					description = <"*For recording total fluid output over a period (may transcend a number of interval or point in time records).(en)">
+				>
+				["at0007"] = <
+					text = <"*Actual(en)">
+					description = <"*For recording the fluid output over a period of time when this will later be totalled.(en)">
+				>
+				["at0008"] = <
+					text = <"*List(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0016"] = <
+					text = <"*Fluid detail(en)">
+					description = <"*Details of the fluid or substance observed being observed.(en)">
+				>
+				["at0016.1"] = <
+					text = <"Podrobnosti bruhanja">
+					description = <"Podrobnosti bruhanja">
+				>
+				["at0018"] = <
+					text = <"Približno">
+					description = <"Ocena približnega volumna">
+				>
+				["at0019"] = <
+					text = <"Izmerjen">
+					description = <"Izmerjen volumen">
+				>
+				["at0020"] = <
+					text = <"Dokazan">
+					description = <"Dokazan volumen bruhanja">
+				>
+				["at0028"] = <
+					text = <"Merilna naprava">
+					description = <"Podatki o napravo s katero smo izmerili bruhanje">
+				>
+				["at0031"] = <
+					text = <"Preciznost naprave">
+					description = <"Podatki o preciznosti meritve bruhanja">
+				>
+			>
+		>
+	>
