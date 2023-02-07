@@ -1,0 +1,111 @@
+archetype (adl_version=1.4; uid=3f6b625d-5a7b-380d-a064-0a136e515496)
+	openEHR-EHR-CLUSTER.imaging.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["date"] = <"14/12/2009">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Sam Heard, Ocean Informatics, Australia","Heather Leslie, Ocean Informatics, Australia">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record simple imaging details , used in requests for imaging, records of imaging procedures and imaging reports.">
+			keywords = <"imaging","radiology">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"For use within OBSERVATION. request, ACTION.imaging and OBSERVATION.imaging or similar archetypes.">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"CDD5998D631666325965F93984FEF093">
+		["build_uid"] = <"b48e3c50-46e8-3e3b-9d51-0d2243ef81bd">
+	>
+
+definition
+	CLUSTER[at0000] matches {    -- Imaging details
+		items cardinality matches {1..*; unordered} matches {
+			ELEMENT[at0001] occurrences matches {0..1} matches {    -- Imaging category
+				value matches {
+					DV_TEXT matches {*}
+					DV_CODED_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0010] occurrences matches {0..1} matches {    -- Imaging test name
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			allow_archetype CLUSTER[at0007] occurrences matches {0..*} matches {    -- Anatomical location
+				include
+					archetype_id/value matches {/openEHR-EHR-CLUSTER\.anatomical_location-precise(-[a-zA-Z0-9_]+)*\.v1/}
+			}
+			CLUSTER[at0011] occurrences matches {0..*} matches {    -- View
+				items cardinality matches {1..*; unordered} matches {
+					ELEMENT[at0012] occurrences matches {0..1} matches {    -- View name
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0013] occurrences matches {0..1} matches {    -- Per-view findings
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0015] occurrences matches {0..1} matches {    -- Image
+						value matches {
+							DV_MULTIMEDIA matches {*}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Imaging details">
+					description = <"Details of imaging, used in requests for imaging, records of imaging procedures and imaging reports.">
+				>
+				["at0001"] = <
+					text = <"Imaging category">
+					description = <"The type of imaging.">
+				>
+				["at0007"] = <
+					text = <"Anatomical location">
+					description = <"The anatomical site(s) to be imaged.">
+				>
+				["at0010"] = <
+					text = <"Imaging test name">
+					description = <"Imaging test requested / performed.">
+				>
+				["at0011"] = <
+					text = <"View">
+					description = <"Details about a particular view.">
+				>
+				["at0012"] = <
+					text = <"View name">
+					description = <"A description of the view taken.">
+				>
+				["at0013"] = <
+					text = <"Per-view findings">
+					description = <"Findings related to the specific view.">
+				>
+				["at0015"] = <
+					text = <"Image">
+					description = <"*">
+				>
+			>
+		>
+	>
