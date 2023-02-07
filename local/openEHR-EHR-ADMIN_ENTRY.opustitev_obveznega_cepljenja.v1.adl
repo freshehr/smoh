@@ -1,0 +1,112 @@
+archetype (adl_version=1.4; uid=7589dc42-2195-348a-ab68-e634bb81c080)
+	openEHR-EHR-ADMIN_ENTRY.opustitev_obveznega_cepljenja.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::sl]>
+
+description
+	original_author = <
+		["name"] = <"">
+	>
+	lifecycle_state = <"0">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"F3B5A0456FB99CC8F2A6B80C68B78A26">
+		["build_uid"] = <"3b2962a2-17d7-37f9-81ae-8f23c8d269a8">
+	>
+
+definition
+	ADMIN_ENTRY[at0000] matches {    -- Opustitev obveznega cepljenja
+		data matches {
+			ITEM_TREE[at0001] matches {    -- Tree
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0002] occurrences matches {0..1} matches {    -- Številka odločbe o opustitvi cepljenja
+						value matches {
+							DV_COUNT matches {*}
+						}
+					}
+					ELEMENT[at0003] occurrences matches {0..1} matches {    -- Datum odločbe o opustitvi celjenja
+						value matches {
+							DV_DATE matches {*}
+						}
+					}
+					ELEMENT[at0004] occurrences matches {0..1} matches {    -- Opustitev cepljenja proti bolezni
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0005] occurrences matches {0..1} matches {    -- Opustitev cepljenja z določenim cepivom
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0006] occurrences matches {0..1} matches {    -- Trajanje opustitve cepljenja
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0007] occurrences matches {0..1} matches {    -- Začasna opustitev cepljenja
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0008] occurrences matches {0..1} matches {    -- Razlog opustive cepljenja
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Opustitev obveznega cepljenja">
+					description = <"unknown">
+				>
+				["at0001"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Številka odločbe o opustitvi cepljenja">
+					description = <"Številka odločbe o opustitvi celjenja">
+				>
+				["at0003"] = <
+					text = <"Datum odločbe o opustitvi celjenja">
+					description = <"*">
+				>
+				["at0004"] = <
+					text = <"Opustitev cepljenja proti bolezni">
+					description = <"Opustitev cepljenja proti">
+				>
+				["at0005"] = <
+					text = <"Opustitev cepljenja z določenim cepivom">
+					description = <"Opustitev cepljenja z določenim cepivom">
+				>
+				["at0006"] = <
+					text = <"Trajanje opustitve cepljenja">
+					description = <"Trajanje opustitve cepljenja">
+				>
+				["at0007"] = <
+					text = <"Začasna opustitev cepljenja">
+					description = <"Začasna opustitev cepljenja">
+				>
+				["at0008"] = <
+					text = <"Razlog opustive cepljenja">
+					description = <"Razlog za opustitev cepljenja">
+				>
+			>
+		>
+	>
