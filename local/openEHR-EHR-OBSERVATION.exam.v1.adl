@@ -1,0 +1,135 @@
+archetype (adl_version=1.4; uid=d2a40aa4-0925-30e0-811b-42ad3599736c)
+	openEHR-EHR-OBSERVATION.exam.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"Uroš Rajkovič, Biljana Prinčič">
+				["organisation"] = <"Slovenia">
+				["email"] = <"uros.rajkovic@fov.uni-mb.si, biljana.princic@marand.si">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"10/11/2007">
+		["name"] = <"Heather Leslie">
+		["organisation"] = <"Ocean Informatics">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"Za beleženje znakov izmerjenih v okviru fizikalnega pregleda">
+			keywords = <"pregled","fizikalni">
+			use = <"\"Container\" za gnezdenje \"cluster\"-jev, ki podrobno opisujejo posamezne elemente fizikalnega pregleda vključujoč pregled, tipanje, avskultacijo (osluškovanje) in udarjanje (skupine vključno z njihovimi specializacijami).
+
+cluster - skupina, grozd">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"For recording findings determined at physical examination.">
+			keywords = <"examination","physical">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Designed as a container for nesting detailed examination-related clusters including the inspection, palpation, auscultation and percussion CLUSTERS and their specialisations.">
+		>
+	>
+	other_details = <
+		["references"] = <"">
+		["MD5-CAM-1.0.1"] = <"131FF22D69C2F326F96A10B85758AFCC">
+		["build_uid"] = <"5e9730ce-bce2-389f-9e60-8a11282e71a3">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Examination findings
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Clinical description
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									allow_archetype CLUSTER[at0005] occurrences matches {0..1} matches {    -- Examination detail
+										include
+											archetype_id/value matches {/.*/}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Examination findings">
+					description = <"For recording findings determined at physical examination.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"@ internal @">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Clinical description">
+					description = <"The description of the examination findings.">
+				>
+				["at0005"] = <
+					text = <"Examination detail">
+					description = <"Details of the phyical examination.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Ugotovitve pregleda">
+					description = <"Za dokumentiranje ugotovitev/znakov fizikalnega pregleda subjekta">
+				>
+				["at0001"] = <
+					text = <"*Event Series(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"*Any event(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0003"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0004"] = <
+					text = <"Klinični opis">
+					description = <"Beleženje ugotovljenih dejstev pri pregledu">
+				>
+				["at0005"] = <
+					text = <"Podrobno">
+					description = <"Podatki o fizikalnem pregledu">
+				>
+			>
+		>
+	>
