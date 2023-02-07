@@ -1,0 +1,237 @@
+archetype (adl_version=1.4; uid=6b0ed950-f964-3aa8-bd1f-1f00638ec205)
+	openEHR-DEMOGRAPHIC-ROLE.individual_provider.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::pt-br]>
+	translations = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			author = <
+				["name"] = <"Sergio Miranda Freire">
+				["organisation"] = <"Universidade do Estado do Rio de Janeiro - UERJ">
+				["email"] = <"sergio@lampada.uerj.br">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"22/05/2009">
+		["name"] = <"Sergio Miranda Freire & Rigoleta Dutra Mediano Dias">
+		["organisation"] = <"Universidade do Estado do Rio de Janeiro - UERJ">
+		["email"] = <"sergio@lampada.uerj.br">
+	>
+	lifecycle_state = <"Authordraft">
+	details = <
+		["pt-br"] = <
+			language = <[ISO_639-1::pt-br]>
+			purpose = <"Representação de dados de uma pessoa exercendo o papel Profissional de Saúde ">
+			keywords = <"serviço demográfico","profissional de saúde">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Usado em serviços demográficos para coletar dados sobre profissionais de saúde">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"Representation of an individual healthcare provider demographic data">
+			keywords = <"demographic service","individual healthcare provider">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Used in demographic service to collect a individual healthcare provider's data">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"9deb54be72a36c4aebf2f843f0c5d538">
+		["build_uid"] = <"151961eb-b886-3ca3-a0c4-3e1880b5ea8d">
+	>
+
+definition
+	ROLE[at0000] matches {    -- Profissional de saúde
+		identities cardinality matches {1..*; ordered} matches {
+			allow_archetype PARTY_IDENTITY[at0001] matches {    -- Nome do profissional
+				include
+					archetype_id/value matches {/(person_name)[a-zA-Z0-9_-]*\.v1/}
+			}
+		}
+		capabilities cardinality matches {0..*; ordered} matches {
+			CAPABILITY[at0002] occurrences matches {0..*} matches {    -- Capacitação
+				credentials matches {
+					ITEM_TREE[at0020] occurrences matches {0..1} matches {    -- Credenciais
+						items cardinality matches {0..*; unordered; unique} matches {
+							allow_archetype CLUSTER[at0021] occurrences matches {0..*} matches {    -- Detalhes da credencial
+								include
+									archetype_id/value matches {/(individual_provider_credentials)[a-zA-Z0-9_-]*\.v1/}
+							}
+						}
+					}
+				}
+			}
+		}
+		contacts cardinality matches {0..*; ordered} matches {
+			CONTACT[at0003] occurrences matches {0..*} matches {    -- Contato
+				addresses cardinality matches {0..*; ordered} matches {
+					allow_archetype ADDRESS[at0030] matches {    -- Endereço
+						include
+							archetype_id/value matches {/(electronic_communication)[a-zA-Z0-9_-]*\.v1/}
+							archetype_id/value matches {/(address)([a-zA-Z0-9_]+)*\.v1/}
+					}
+				}
+			}
+		}
+		relationships cardinality matches {0..*; ordered} matches {
+			PARTY_RELATIONSHIP[at0004] occurrences matches {0..*} matches {    -- Relacionamento com uma fonte pagadora
+				details matches {
+					ITEM_TREE[at0040] occurrences matches {0..1} matches {    -- Detalhes
+						items cardinality matches {1..1; unordered; unique} matches {
+							allow_archetype CLUSTER[at0041] matches {    -- Documento de Identificação
+								include
+									archetype_id/value matches {/(provider_identifier)[a-zA-Z0-9_-]*\.v1/}
+							}
+						}
+					}
+				}
+			}
+			PARTY_RELATIONSHIP[at0005] occurrences matches {0..*} matches {    -- Relacionamento empregador/empregado
+				details matches {
+					ITEM_TREE[at0050] occurrences matches {0..1} matches {    -- Detalhes
+						items cardinality matches {1..*; ordered} matches {
+							allow_archetype CLUSTER[at0051] matches {    -- Documento de Identificação
+								include
+									archetype_id/value matches {/(provider_identifier)[a-zA-Z0-9_-]*\.v1/}
+							}
+							ELEMENT[at0052] occurrences matches {0..1} matches {    -- Função
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["pt-br"] = <
+			items = <
+				["at0000"] = <
+					text = <"Profissional de saúde">
+					description = <"Dados sobre uma pessoa que exerce o papel de um profissional de saúde">
+				>
+				["at0001"] = <
+					text = <"Nome do profissional">
+					description = <"Nome do profissional de saúde">
+				>
+				["at0002"] = <
+					text = <"Capacitação">
+					description = <"capacitação do Profissional">
+				>
+				["at0003"] = <
+					text = <"Contato">
+					description = <"Contato do profissional de saúde">
+				>
+				["at0004"] = <
+					text = <"Relacionamento com uma fonte pagadora">
+					description = <"Relacionamento entre um profissional de saúde e uma fonte pagadora">
+				>
+				["at0005"] = <
+					text = <"Relacionamento empregador/empregado">
+					description = <"Relacionamento empregador/empregado entre um profissional de saúde e uma organização prestadora de assistência à saúde">
+				>
+				["at0020"] = <
+					text = <"Credenciais">
+					description = <"Credenciais do professional de saúde">
+				>
+				["at0021"] = <
+					text = <"Detalhes da credencial">
+					description = <"Detalhes da credencial do profissional de saúde">
+				>
+				["at0030"] = <
+					text = <"Endereço">
+					description = <"Endereço onde o profissional pode ser contactado">
+				>
+				["at0040"] = <
+					text = <"Detalhes">
+					description = <"Detalhes do relacionamento profissional/fonte pagadora">
+				>
+				["at0041"] = <
+					text = <"Documento de Identificação">
+					description = <"A identificação do profissional de saúde junto à fonte pagadora">
+				>
+				["at0050"] = <
+					text = <"Detalhes">
+					description = <"Detalhes do relacionamento profissional de saúde/prestador de assistência">
+				>
+				["at0051"] = <
+					text = <"Documento de Identificação">
+					description = <"Identificação do profissional de saúde junto à organização prestadora de assistência à saúde">
+				>
+				["at0052"] = <
+					text = <"Função">
+					description = <"A função do profissional de saúde junto à organização prestadora de assistência à saúde">
+				>
+			>
+		>
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Individual healthcare provider">
+					description = <"Data about a person who performs the role of an individual healthcare provider.">
+				>
+				["at0001"] = <
+					text = <"Name">
+					description = <"Individual healthcare provider's name.">
+				>
+				["at0002"] = <
+					text = <"Capability">
+					description = <"Individual healthcare provider's capability.">
+				>
+				["at0003"] = <
+					text = <"Contact">
+					description = <"Individual healthcare provider's contact.">
+				>
+				["at0004"] = <
+					text = <"Relationship with a third-party payer">
+					description = <"Relationship between an individual healthcare provider and a third-party payer.">
+				>
+				["at0005"] = <
+					text = <"Employer/employee relationship">
+					description = <"Employer/employee relationship between an individual healthcare provider and a healthcare provider organisation.">
+				>
+				["at0020"] = <
+					text = <"Credentials">
+					description = <"Individual healthcare provider credentials.">
+				>
+				["at0021"] = <
+					text = <"Credentials details">
+					description = <"Individual healthcare provider credentials details.">
+				>
+				["at0030"] = <
+					text = <"Address">
+					description = <"Address where the individual provider can be contacted.">
+				>
+				["at0040"] = <
+					text = <"Relationship details">
+					description = <"Details of an individual healthcare provider/third-party payer relationship.">
+				>
+				["at0041"] = <
+					text = <"Identifier">
+					description = <"The identifer of the individual healthcare provider at the third-party payer.">
+				>
+				["at0050"] = <
+					text = <"Details">
+					description = <"Details of the employer/employee relationship.">
+				>
+				["at0051"] = <
+					text = <"Identifier">
+					description = <"The identifer of the individual healthcare provider at the healthcare provider organisation.">
+				>
+				["at0052"] = <
+					text = <"Employement role">
+					description = <"The role of the individual healthcare provider at the healthcare provider organisation.">
+				>
+			>
+		>
+	>
