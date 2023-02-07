@@ -1,0 +1,99 @@
+archetype (adl_version=1.4; uid=ce35f14b-fd16-3bc6-905a-611f66a234ba)
+	openEHR-DEMOGRAPHIC-CLUSTER.high_level_address_other_data_br.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::pt-br]>
+	translations = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			author = <
+				["name"] = <"Sergio Miranda Freire">
+				["organisation"] = <"Universidade do Estado do Rio de Janeiro - UERJ">
+				["email"] = <"sergio@lampada.uerj.br">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"23/05/2009">
+		["name"] = <"Sergio Miranda Freire & Rigoleta Dutra Mediano Dias">
+		["organisation"] = <"Universidade do Estado do Rio de Janeiro - UERJ">
+		["email"] = <"sergio@lampada.uerj.br">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["pt-br"] = <
+			language = <[ISO_639-1::pt-br]>
+			purpose = <"Representação dos componentes de alto nível do endereço específicos do Brasil">
+			keywords = <"serviço demográfico","componentes de alto nível do endereço">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Usado em serviços demográficos para registrar os componentes de alto nível do endereço específicos do Brasil">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"Representation of data about high level address components in Brazil">
+			keywords = <"demographic service","high level address components">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Used in demographic services to register data about high level address components in Brasil">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"cf4fb72d43069df64b450eba24f2c4ed">
+		["build_uid"] = <"8d2d5ff6-b820-3b95-a537-36f1ed5b7f31">
+	>
+
+definition
+	CLUSTER[at0000] matches {    -- Outros componentes de alto nível do endereço
+		items cardinality matches {0..*; ordered} matches {
+			ELEMENT[at0001] occurrences matches {0..1} matches {    -- Bairro
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0002] occurrences matches {0..1} matches {    -- Setor censitário
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["pt-br"] = <
+			items = <
+				["at0000"] = <
+					text = <"Outros componentes de alto nível do endereço">
+					description = <"Componentes de alto nível do endereço utilizados no Brasil">
+				>
+				["at0001"] = <
+					text = <"Bairro">
+					description = <"Bairro do Logradouro">
+				>
+				["at0002"] = <
+					text = <"Setor censitário">
+					description = <"Código do setor censitário">
+				>
+			>
+		>
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Other high level address components">
+					description = <"High level address components used in Brazil.">
+				>
+				["at0001"] = <
+					text = <"District">
+					description = <"District.">
+				>
+				["at0002"] = <
+					text = <"Census area">
+					description = <"Area defined by the Brazilian Geographic and Statistics Bureau according to the spacial distribution of the population.">
+				>
+			>
+		>
+	>
