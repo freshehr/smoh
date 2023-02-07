@@ -1,0 +1,382 @@
+archetype (adl_version=1.4; uid=731873cb-6041-3ef2-bee1-78aa1f2f566b)
+	openEHR-EHR-OBSERVATION.child_growth.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["application"] = <"Adl Designer">
+			>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"21/04/2011">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics">
+		["email"] = <"ian.mcnicoll@oceaninformatics .com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Tomaz Gornik, Marand si , Slovenia","Heather Leslie, Ocean Informatics, Australia","Sam Heard, Ocean Informatics, Australia">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record comparative measures related to child growth, generally calculated from an algorithm which relates to the child's age.">
+			keywords = <"growth","calculation","centile","percentile","z-score","SD","height","weight","head cicrumference">
+			use = <"Use to record a variety of growth calculations expressed comparatively to population scores, either as standard deviations or as percentiles. ">
+			misuse = <"Do not use to record primary growth measurements such as height, weight,  head circumference, leg length or blood pressure.  The original measurements should be recorded in the appropriate OBSERVATION archetypes e.g OBSERVATION.height.v1, OBSERVATION.weight.v1, OBSERVATION.head_circumference.v1, OBSERVATION.height-sitting.v1. Subischial leg length is derived by subtracting sitting height/length from height/length.">
+		>
+	>
+	other_details = <
+		["references"] = <"http://www.childrenchart.com/
+Blood Pressure Tables for Children and Adolescents http://www.nhlbi.nih.gov/guidelines/hypertension/child_tbl.htm
+
+">
+		["MD5-CAM-1.0.1"] = <"9BC2240F316D39DB929A8CF6A7C3EF10">
+		["build_uid"] = <"c062b6c2-21be-374c-92e7-c2770fab1350">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Child growth calculation
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0005] occurrences matches {0..1} matches {    -- Adjusted age
+										value matches {
+											DV_DURATION matches {
+												value matches {PYMWD/|>=P0D|}
+											}
+											C_DV_QUANTITY <
+												property = <[openehr::128]>
+												list = <
+													["1"] = <
+														units = <"a">
+														magnitude = <|0.0..100.0|>
+														precision = <|3|>
+													>
+												>
+											>
+										}
+									}
+									ELEMENT[at0030] occurrences matches {0..1} matches {    -- Adjusted for gestation
+										value matches {
+											DV_BOOLEAN matches {
+												value matches {true}
+											}
+										}
+									}
+									ELEMENT[at0036] occurrences matches {0..1} matches {    -- Predicted growth
+										value matches {
+											DV_BOOLEAN matches {*}
+										}
+									}
+									CLUSTER[at0014] occurrences matches {0..*} matches {    -- Growth calculation
+										name matches {
+											DV_CODED_TEXT matches {
+												defining_code matches {
+													[local::
+													at0020,    -- Height for age
+													at0021,    -- Sitting height for age
+													at0022,    -- Leg length for age
+													at0023,    -- Weight for age
+													at0024,    -- Head circumference for age
+													at0025,    -- Weight for height
+													at0026,    -- Systolic blood pressure for age and height
+													at0027,    -- Diastolic blood pressure for age and height
+													at0029]    -- Body mass index for age
+												}
+											}
+										}
+										items cardinality matches {1..*; unordered} matches {
+											ELEMENT[at0010] occurrences matches {0..1} matches {    -- Percentile
+												value matches {
+													DV_PROPORTION matches {
+														numerator matches {|0.0..100.0|}
+														type matches {2}
+													}
+												}
+											}
+											ELEMENT[at0011] occurrences matches {0..1} matches {    -- Z-score (SDS)
+												value matches {
+													C_DV_QUANTITY <
+														property = <[openehr::380]>
+														list = <
+															["1"] = <
+																units = <"1">
+																precision = <|2|>
+															>
+														>
+													>
+												}
+											}
+											ELEMENT[at0018] occurrences matches {0..1} matches {    -- Method
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											ELEMENT[at0019] occurrences matches {0..1} matches {    -- Comment
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+										}
+									}
+									ELEMENT[at0028] occurrences matches {0..1} matches {    -- Comment
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0031] matches {    -- Tree
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0032] occurrences matches {0..1} matches {    -- Age estimation method
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::at0034]    -- Skeletal age
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Child growth calculation">
+					description = <"Calculations related to child growth, generally based on the subject's age.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0005"] = <
+					text = <"Adjusted age">
+					description = <"Age when measurement was calculated, possibly adjusted for pre-term delivery. May be expressed as a conventional age or as a decimal age. ">
+				>
+				["at0010"] = <
+					text = <"Percentile">
+					description = <"Percentile calculated using standard normal distribution for the given adjusted age. ">
+				>
+				["at0011"] = <
+					text = <"Z-score (SDS)">
+					description = <"The z-score of an observation for a given adjusted age.  The z-score indicates how many standard deviations the observation is above or below the population mean.">
+				>
+				["at0014"] = <
+					text = <"Growth calculation">
+					description = <"The name of the growth calculation.">
+				>
+				["at0018"] = <
+					text = <"Method">
+					description = <"The method or algorithm by which the calculation was derived.">
+				>
+				["at0019"] = <
+					text = <"Comment">
+					description = <"A comment on an individual growth calculation.">
+				>
+				["at0020"] = <
+					text = <"Height for age">
+					description = <"Calculations for height/length for a given age, adjusted for pre-term delivery.">
+				>
+				["at0021"] = <
+					text = <"Sitting height for age">
+					description = <"Calculations for sitting height at a given age, adjusted for pre-term delivery.">
+				>
+				["at0022"] = <
+					text = <"Leg length for age">
+					description = <"Calculations for subischial leg length at a given age, adjusted for pre-term delivery.">
+				>
+				["at0023"] = <
+					text = <"Weight for age">
+					description = <"Calculations for weight at a given age, adjusted for pre-term delivery.">
+				>
+				["at0024"] = <
+					text = <"Head circumference for age">
+					description = <"Calculations for head circumference at a given age, adjusted for pre-term delivery.">
+				>
+				["at0025"] = <
+					text = <"Weight for height">
+					description = <"Calculations for weight at a given height/length.">
+				>
+				["at0026"] = <
+					text = <"Systolic blood pressure for age and height">
+					description = <"Calculations for systolic blood pressure at a given age and height/length, adjusted for pre-term delivery.">
+				>
+				["at0027"] = <
+					text = <"Diastolic blood pressure for age and height">
+					description = <"Calculations for diastolic blood pressure at a given age and height/length, adjusted for pre-term delivery.">
+				>
+				["at0028"] = <
+					text = <"Comment">
+					description = <"A comment on child growth calculations, not captured in other fields.">
+				>
+				["at0029"] = <
+					text = <"Body mass index for age">
+					description = <"Calculations for bofy mass index for a given age, adjusted for pre-term delivery.">
+				>
+				["at0030"] = <
+					text = <"Adjusted for gestation">
+					description = <"True if the calculation age has been adjusted for pre-term gestation.">
+				>
+				["at0031"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0032"] = <
+					text = <"Age estimation method">
+					description = <"A term describing a specific non-date based method of age estimation.">
+				>
+				["at0034"] = <
+					text = <"Skeletal age">
+					description = <"Age is estimated from skeletal age measurement.">
+				>
+				["at0036"] = <
+					text = <"Predicted growth">
+					description = <"The calculation is a prediction based on a future age.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Child growth calculation(en)">
+					description = <"*Calculations related to child growth, generally based on the subject's age.(en)">
+				>
+				["at0001"] = <
+					text = <"*Event Series(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"*Any event(en)">
+					description = <"**(en)">
+				>
+				["at0003"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0005"] = <
+					text = <"*Adjusted age(en)">
+					description = <"*Age when measurement was calculated, possibly adjusted for pre-term delivery. May be expressed as a conventional age or as a decimal age. (en)">
+				>
+				["at0010"] = <
+					text = <"*Percentile(en)">
+					description = <"*Percentile calculated using standard normal distribution for the given adjusted age. (en)">
+				>
+				["at0011"] = <
+					text = <"*Z-score (SDS)(en)">
+					description = <"*The z-score of an observation for a given adjusted age.  The z-score indicates how many standard deviations the observation is above or below the population mean.(en)">
+				>
+				["at0014"] = <
+					text = <"*Growth calculation(en)">
+					description = <"*The name of the growth calculation.(en)">
+				>
+				["at0018"] = <
+					text = <"*Method(en)">
+					description = <"*The method or algorithm by which the calculation was derived.(en)">
+				>
+				["at0019"] = <
+					text = <"*Comment(en)">
+					description = <"*A comment on an individual growth calculation.(en)">
+				>
+				["at0020"] = <
+					text = <"*Height for age(en)">
+					description = <"*Calculations for height/length for a given age, adjusted for pre-term delivery.(en)">
+				>
+				["at0021"] = <
+					text = <"*Sitting height for age(en)">
+					description = <"*Calculations for sitting height at a given age, adjusted for pre-term delivery.(en)">
+				>
+				["at0022"] = <
+					text = <"*Leg length for age(en)">
+					description = <"*Calculations for subischial leg length at a given age, adjusted for pre-term delivery.(en)">
+				>
+				["at0023"] = <
+					text = <"*Weight for age(en)">
+					description = <"*Calculations for weight at a given age, adjusted for pre-term delivery.(en)">
+				>
+				["at0024"] = <
+					text = <"*Head circumference for age(en)">
+					description = <"*Calculations for head circumference at a given age, adjusted for pre-term delivery.(en)">
+				>
+				["at0025"] = <
+					text = <"*Weight for height(en)">
+					description = <"*Calculations for weight at a given height/length.(en)">
+				>
+				["at0026"] = <
+					text = <"*Systolic blood pressure for age and height(en)">
+					description = <"*Calculations for systolic blood pressure at a given age and height/length, adjusted for pre-term delivery.(en)">
+				>
+				["at0027"] = <
+					text = <"*Diastolic blood pressure for age and height(en)">
+					description = <"*Calculations for diastolic blood pressure at a given age and height/length, adjusted for pre-term delivery.(en)">
+				>
+				["at0028"] = <
+					text = <"*Comment(en)">
+					description = <"*A comment on child growth calculations, not captured in other fields.(en)">
+				>
+				["at0029"] = <
+					text = <"*Body mass index for age(en)">
+					description = <"*Calculations for bofy mass index for a given age, adjusted for pre-term delivery.(en)">
+				>
+				["at0030"] = <
+					text = <"*Adjusted for gestation(en)">
+					description = <"*True if the calculation age has been adjusted for pre-term gestation.(en)">
+				>
+				["at0031"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0032"] = <
+					text = <"*Age estimation method(en)">
+					description = <"*A term describing a specific non-date based method of age estimation.(en)">
+				>
+				["at0034"] = <
+					text = <"*Skeletal age(en)">
+					description = <"*Age is estimated from skeletal age measurement.(en)">
+				>
+				["at0036"] = <
+					text = <"*Predicted growth(en)">
+					description = <"*The calculation is a prediction based on a future age.(en)">
+				>
+			>
+		>
+	>
