@@ -1,0 +1,39 @@
+archetype (adl_version=1.4; uid=ee2543d3-23a6-347d-898a-748b3a421bea)
+	openEHR-EHR-CLUSTER.device_details.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["name"] = <"">
+	>
+	lifecycle_state = <"0">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+		>
+	>
+	other_details = <
+		["references"] = <"">
+		["MD5-CAM-1.0.1"] = <"73467CFB07B974A78659869916A78BD5">
+		["build_uid"] = <"83aa8bf3-6afa-39cd-866b-dd3647b3427e">
+	>
+
+definition
+	CLUSTER[at0000] matches {*}    -- Device details
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Device details">
+					description = <"unknown">
+				>
+			>
+		>
+	>
