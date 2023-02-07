@@ -6,6 +6,17 @@ concept
 
 language
 	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["application"] = <"Adl Designer">
+			>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+	>
 
 description
 	original_author = <
@@ -16,17 +27,22 @@ description
 	>
 	lifecycle_state = <"CommitteeDraft">
 	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
 		["en"] = <
 			language = <[ISO_639-1::en]>
 			purpose = <"To describe how a medication should be administered or was actually administered.">
 			keywords = <"medication administration","injection">
-			copyright = <"© National E-Health Transition Authority">
 			use = <"To be used in INSTRUCTION.medication and ACTION.medication to describe the administration.">
 			misuse = <"Not to be used for administration of anything other than medication.">
 		>
 	>
 	other_details = <
-		["MD5-CAM-1.0.1"] = <"E4C32401F630923CC4B5EE13124F1BAA">
+		["MD5-CAM-1.0.1"] = <"49975E4310250177EF4B73A7A40F41E8">
 		["build_uid"] = <"a8c21aac-fa7d-3710-9bfe-26e32c1042ee">
 	>
 
@@ -87,6 +103,34 @@ ontology
 				["at0005"] = <
 					text = <"Intravenous details">
 					description = <"Details of intravenous administration.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Medication administration(en)">
+					description = <"*Information about the future or actual administration of medication.(en)">
+				>
+				["at0001"] = <
+					text = <"*Route(en)">
+					description = <"*The route by which the medication is administered (e.g. oral, sublingual etc).(en)">
+				>
+				["at0002"] = <
+					text = <"*Site(en)">
+					description = <"*A description of the site of administration.(en)">
+				>
+				["at0003"] = <
+					text = <"*Delivery method(en)">
+					description = <"*The method of delivery if this should be specified (e.g. via a nebuliser or spacer).(en)">
+				>
+				["at0004"] = <
+					text = <"*Dose duration(en)">
+					description = <"*The length of time over which to administer each dose (e.g. an intravenous administration may have to be over a period of 5 minutes).(en)">
+				>
+				["at0005"] = <
+					text = <"*Intravenous details(en)">
+					description = <"*Details of intravenous administration.(en)">
 				>
 			>
 		>
