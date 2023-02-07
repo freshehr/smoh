@@ -1,0 +1,82 @@
+archetype (adl_version=1.4; uid=1c60bc71-1ce3-3c15-b670-ea8c3d148d31)
+	openEHR-EHR-OBSERVATION.tnm_clinical.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["date"] = <"19/03/2010">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record the clinical stage of a TNM Cancer staging.
+This archetypes acts a simple wrapper around a TNM staging CLUSTER archetype">
+			keywords = <"TNM","cancer","malignancy","tumour">
+			use = <"Used in combination with a TNM Staging CLUSTER archetype. The Stage category should be set to cTNM - Clinical.">
+			misuse = <"Do not use for the pathological stage of TNM Cancer staging. This is normally recorded within a lab test - histopathology archetype.">
+		>
+	>
+	other_details = <
+		["references"] = <"">
+		["MD5-CAM-1.0.1"] = <"87DFFF26A8F6B2DD21535CA5CB7D2B18">
+		["build_uid"] = <"8aeeb249-f215-3068-9d52-fc619a236bc6">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- TNM Clinical cancer staging
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									allow_archetype CLUSTER[at0004] occurrences matches {0..1} matches {    -- TNM clinical stage
+										include
+											archetype_id/value matches {/openEHR-EHR-CLUSTER\.tnm_staging_7th(-[a-zA-Z0-9_]+)*\.v1|openEHR-EHR-CLUSTER\.tnm_staging(-[a-zA-Z0-9_]+)*\.v1/}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"TNM Clinical cancer staging">
+					description = <"The clinical stage of a TNM Cnacer staging.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"TNM clinical stage">
+					description = <"The details of a disease specific clinical staging">
+				>
+			>
+		>
+	>
