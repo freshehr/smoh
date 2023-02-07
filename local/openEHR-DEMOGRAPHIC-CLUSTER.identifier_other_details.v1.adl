@@ -1,0 +1,132 @@
+archetype (adl_version=1.4; uid=ee01fa4d-b77a-32d0-ac46-fef8e5d4a7b9)
+	openEHR-DEMOGRAPHIC-CLUSTER.identifier_other_details.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::pt-br]>
+	translations = <
+		["en-gb"] = <
+			language = <[ISO_639-1::en-gb]>
+			author = <
+				["name"] = <"Sergio Miranda Freire">
+				["organisation"] = <"Universidade do Estado do Rio de Janeiro - UERJ">
+				["email"] = <"sergio@lampada.uerj.br">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"22/05/2009">
+		["name"] = <"Sergio Miranda Freire & Rigoleta Dutra Mediano Dias">
+		["organisation"] = <"Universidade do Estado do Rio de Janeiro - UERJ">
+		["email"] = <"sergio@lampada.uerj.br">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["pt-br"] = <
+			language = <[ISO_639-1::pt-br]>
+			purpose = <"Representação de outros detalhes relativos a um documento de identificação de uma pessoa/organização">
+			keywords = <"serviço demográfico","identificador">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Usado em serviçoS demográficos para registrar outros detalhes relativos a um documento de identificação de uma pessoa/organização">
+		>
+		["en-gb"] = <
+			language = <[ISO_639-1::en-gb]>
+			purpose = <"Representation of other details about a person/organization identifier">
+			keywords = <"demographic service","identifier">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Used in demographic services to register other details about a person/organisation identifier">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"a7205df4463fb95b1f2f282db83113a3">
+		["build_uid"] = <"6c0eb4c0-2113-35c1-bf70-8494bbf90087">
+	>
+
+definition
+	CLUSTER[at0000] matches {    -- Dados adicionais de um identificador
+		items cardinality matches {0..*; ordered} matches {
+			ELEMENT[at0001] occurrences matches {0..1} matches {    -- Município
+				value matches {
+					DV_CODED_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0002] occurrences matches {0..1} matches {    -- Estado
+				value matches {
+					DV_CODED_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0003] occurrences matches {0..1} matches {    -- País
+				value matches {
+					DV_CODED_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0004] occurrences matches {0..1} matches {    -- Validade da identificação
+				value matches {
+					DV_INTERVAL<DV_DATE> matches {
+						upper matches {
+							DV_DATE matches {*}
+						}
+						lower matches {
+							DV_DATE matches {*}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en-gb"] = <
+			items = <
+				["at0000"] = <
+					text = <"Additional identifier data">
+					description = <"Additional data about an identifier for a person/organisation">
+				>
+				["at0001"] = <
+					text = <"City">
+					description = <"Indicates the city where the identifier was issued">
+				>
+				["at0002"] = <
+					text = <"State">
+					description = <"Indicates the state where the identifier was issued">
+				>
+				["at0003"] = <
+					text = <"Country">
+					description = <"Indicates the country where the identifier was issued">
+				>
+				["at0004"] = <
+					text = <"Time validity">
+					description = <"Period in which this identifier is valid">
+				>
+			>
+		>
+		["pt-br"] = <
+			items = <
+				["at0000"] = <
+					text = <"Dados adicionais de um identificador">
+					description = <"Dados adicionais para um identificador para uma pessoa/organização">
+				>
+				["at0001"] = <
+					text = <"Município">
+					description = <"Indica o município onde o documento foi emitido">
+				>
+				["at0002"] = <
+					text = <"Estado">
+					description = <"Indica o estado onde o documento foi emitido">
+				>
+				["at0003"] = <
+					text = <"País">
+					description = <"Indica o país onde o documento foi emitido">
+				>
+				["at0004"] = <
+					text = <"Validade da identificação">
+					description = <"Período de validade da identificacao">
+				>
+			>
+		>
+	>
