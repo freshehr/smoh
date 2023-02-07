@@ -1,0 +1,211 @@
+archetype (adl_version=1.4; uid=4fc16906-e6c5-35a6-ac41-bc8bd8b4746f)
+	openEHR-EHR-OBSERVATION.head_circumference.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"Uroš Rajkovič, Biljana Prinčič">
+				["organisation"] = <"Slovenia">
+				["email"] = <"uros.rajkovic@fov.uni-mb.si, biljana.princic@marand.si">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"18/10/2010">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"Za beleženje meritve bosega glave subjekta">
+			keywords = <"glava","obseg glave">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record the head cicumference of the subject.">
+			keywords = <"head", ...>
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"EF9A34A5340098CE18F61CBEEC6F275C">
+		["build_uid"] = <"66fc72b4-78aa-3018-9ad5-b88ea0c3d180">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Head circumference
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Head circumference
+										value matches {
+											C_DV_QUANTITY <
+												property = <[openehr::122]>
+												list = <
+													["1"] = <
+														units = <"cm">
+														magnitude = <|0.0..100.0|>
+														precision = <|1|>
+													>
+												>
+											>
+										}
+									}
+									ELEMENT[at0009] occurrences matches {0..1} matches {    -- Comment
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0010] occurrences matches {0..1} matches {    -- Head shape
+										value matches {
+											DV_CODED_TEXT matches {
+												defining_code matches {
+													[local::
+													at0011,    -- Normocephalic
+													at0012,    -- Microcrania
+													at0013]    -- Macrocarnia
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0006] matches {    -- Tree
+				items cardinality matches {0..*; unordered} matches {
+					allow_archetype CLUSTER[at0007] occurrences matches {0..1} matches {    -- Device
+						include
+							archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Head circumference">
+					description = <"The head circumference of the subject.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Head circumference">
+					description = <"The head circumference of the subject.">
+				>
+				["at0006"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0007"] = <
+					text = <"Device">
+					description = <"Details of the device used.">
+				>
+				["at0009"] = <
+					text = <"Comment">
+					description = <"Textual comment on the result.">
+				>
+				["at0010"] = <
+					text = <"Head shape">
+					description = <"Head shape of Infants">
+				>
+				["at0011"] = <
+					text = <"Normocephalic">
+					description = <"Normocephalic head shape">
+				>
+				["at0012"] = <
+					text = <"Microcrania">
+					description = <"Microcrania ">
+				>
+				["at0013"] = <
+					text = <"Macrocarnia">
+					description = <"*">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Obseg glave">
+					description = <"Izmerjen obseg glave subjekta">
+				>
+				["at0001"] = <
+					text = <"*Event Series(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"*Any event(en)">
+					description = <"**(en)">
+				>
+				["at0003"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0004"] = <
+					text = <"Obseg glave">
+					description = <"Izmerjen obseg glave subjekta">
+				>
+				["at0006"] = <
+					text = <"*Tree(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0007"] = <
+					text = <"Naprava">
+					description = <"Podatki o napravi s katero je bila opravljena meritev">
+				>
+				["at0009"] = <
+					text = <"Opombe">
+					description = <"Besedni opis rezultatov">
+				>
+				["at0010"] = <
+					comment = <"*(en)">
+					text = <"Oblika">
+					description = <"Oblika glave novorojenčka">
+				>
+				["at0011"] = <
+					text = <"Normocefalna">
+					description = <"Oblika glave je normalan">
+				>
+				["at0012"] = <
+					text = <"Mikrokarnija">
+					description = <"Mikrokarnija">
+				>
+				["at0013"] = <
+					text = <"Makrokarnija">
+					description = <"Makrokarnija">
+				>
+			>
+		>
+	>
