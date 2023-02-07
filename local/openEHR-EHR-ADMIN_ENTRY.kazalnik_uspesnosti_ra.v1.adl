@@ -1,0 +1,182 @@
+archetype (adl_version=1.4; uid=af4bbee4-5ae0-3bb5-8af4-d2ad343a2c2d)
+	openEHR-EHR-ADMIN_ENTRY.kazalnik_uspesnosti_ra.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::sl]>
+	translations = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			author = <
+				["name"] = <"?">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["name"] = <"">
+	>
+	lifecycle_state = <"0">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"*(sl)">
+			copyright = <"*(sl)">
+			use = <"Use ADMIN_ENTRY/provider to capture Name and identifier of clinician responsible for a specific indicator. ">
+			misuse = <"*(sl)">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"66E6225E05F93BB4013A825F6F3A2A5B">
+		["build_uid"] = <"04a85b59-15d7-3bd9-8487-b1cbf10a7451">
+	>
+
+definition
+	ADMIN_ENTRY[at0000] matches {    -- Kazalnik uspesnosti RA
+		data matches {
+			ITEM_TREE[at0001] matches {    -- Tree
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0002] occurrences matches {0..1} matches {    -- Koda kazalnika
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0016] occurrences matches {0..1} matches {    -- Verzija
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0019] occurrences matches {0..1} matches {    -- Mesec poročanja
+						value matches {
+							DV_DATE matches {
+								value matches {yyyy-mm-??}
+							}
+						}
+					}
+					ELEMENT[at0005] occurrences matches {0..1} matches {    -- Delovno število
+						value matches {
+							DV_COUNT matches {
+								magnitude matches {|>=0|}
+							}
+						}
+					}
+					ELEMENT[at0015] occurrences matches {0..1} matches {    -- Referenčno število
+						value matches {
+							DV_COUNT matches {
+								magnitude matches {|>=0|}
+							}
+						}
+					}
+					ELEMENT[at0006] occurrences matches {0..1} matches {    -- Doseženo razmerje
+						value matches {
+							DV_PROPORTION matches {
+								numerator matches {|>=0.0|}
+								is_integral matches {true}
+								type matches {2}
+							}
+						}
+					}
+					ELEMENT[at0007] occurrences matches {0..1} matches {    -- Prag uspešnosti
+						value matches {
+							DV_PROPORTION matches {
+								numerator matches {|>=0.0|}
+								is_integral matches {true}
+								type matches {2}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Performance indicator">
+					description = <"Performance indicator is an element of mothly performance report sent from each reference clinic.
+">
+				>
+				["at0001"] = <
+					text = <"*Tree(sl)">
+					description = <"*@ internal @(sl)">
+				>
+				["at0002"] = <
+					text = <"Indicator">
+					description = <"**(sl)">
+				>
+				["at0005"] = <
+					text = <"Working number">
+					description = <"**(sl)">
+				>
+				["at0006"] = <
+					text = <"Ratio reached">
+					description = <"**(sl)">
+				>
+				["at0007"] = <
+					text = <"Performance threshold">
+					description = <"**(sl)">
+				>
+				["at0015"] = <
+					text = <"Target number">
+					description = <"**(sl)">
+				>
+				["at0016"] = <
+					text = <"Indicator version">
+					description = <"**(sl)">
+				>
+				["at0019"] = <
+					text = <"Month of reporting">
+					description = <"**(sl)">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Kazalnik uspesnosti RA">
+					description = <"Kazalnik uspešnosti predstavlja en element pri poročanju napredka posamezne referenčne ambulante">
+				>
+				["at0001"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Koda kazalnika">
+					description = <"*">
+				>
+				["at0005"] = <
+					text = <"Delovno število">
+					description = <"*">
+				>
+				["at0006"] = <
+					text = <"Doseženo razmerje">
+					description = <"*">
+				>
+				["at0007"] = <
+					text = <"Prag uspešnosti">
+					description = <"*">
+				>
+				["at0015"] = <
+					text = <"Referenčno število">
+					description = <"*">
+				>
+				["at0016"] = <
+					text = <"Verzija">
+					description = <"*">
+				>
+				["at0019"] = <
+					text = <"Mesec poročanja">
+					description = <"*">
+				>
+			>
+		>
+	>
