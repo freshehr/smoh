@@ -1,0 +1,241 @@
+archetype (adl_version=1.4; uid=402d43e0-15bf-3472-bd7a-29fa10d6a05b)
+	openEHR-EHR-OBSERVATION.psychosocial_history_md.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"?">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["name"] = <"">
+	>
+	lifecycle_state = <"0">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"*(sl)">
+			use = <"*(sl)">
+			misuse = <"*(sl)">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"7F543494F2D98722AE17071982397E6D">
+		["build_uid"] = <"6192cd54-e976-3d4e-bb65-b15bb2740438">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Psychosocial history MD
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] occurrences matches {0..1} matches {    -- Parent job titles
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0005] occurrences matches {0..1} matches {    -- Difficult life events
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0006] occurrences matches {0..1} matches {    -- Living situation
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0007] occurrences matches {0..1} matches {    -- Psychiatric events
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0008] occurrences matches {0..1} matches {    -- School
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0009] occurrences matches {0..1} matches {    -- Other
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0015] occurrences matches {0..1} matches {    -- Suspected child abuse
+										value matches {
+											DV_BOOLEAN matches {*}
+										}
+									}
+									ELEMENT[at0013] occurrences matches {0..1} matches {    -- Drug abuse and smoking
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									CLUSTER[at0012] occurrences matches {0..1} matches {    -- Suicide attempt details
+										items cardinality matches {1..*; unordered} matches {
+											ELEMENT[at0011] occurrences matches {0..1} matches {    -- Suicide attempt
+												value matches {
+													DV_BOOLEAN matches {*}
+												}
+											}
+											ELEMENT[at0010] occurrences matches {0..1} matches {    -- Description
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Psychosocial history MD">
+					description = <"unknown">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"Parent job titles">
+					description = <"Free text description regarding Parents job title and job details.">
+				>
+				["at0005"] = <
+					text = <"Difficult life events">
+					description = <"*">
+				>
+				["at0006"] = <
+					text = <"Living situation">
+					description = <"*">
+				>
+				["at0007"] = <
+					text = <"Psychiatric events">
+					description = <"*">
+				>
+				["at0008"] = <
+					text = <"School">
+					description = <"*">
+				>
+				["at0009"] = <
+					text = <"Other">
+					description = <"*">
+				>
+				["at0010"] = <
+					text = <"Description">
+					description = <"*">
+				>
+				["at0011"] = <
+					text = <"Suicide attempt">
+					description = <"*">
+				>
+				["at0012"] = <
+					text = <"Suicide attempt details">
+					description = <"*">
+				>
+				["at0013"] = <
+					text = <"Drug abuse and smoking">
+					description = <"*">
+				>
+				["at0015"] = <
+					text = <"Suspected child abuse">
+					description = <"Is child abuse suspected?">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Psychosocial history MD(sl)">
+					description = <"*unknown(sl)">
+				>
+				["at0001"] = <
+					text = <"*Event Series(sl)">
+					description = <"*@ internal @(sl)">
+				>
+				["at0002"] = <
+					text = <"*Any event(sl)">
+					description = <"**(sl)">
+				>
+				["at0003"] = <
+					text = <"*Tree(sl)">
+					description = <"*@ internal @(sl)">
+				>
+				["at0004"] = <
+					text = <"Zaposlitev staršev">
+					description = <"*Free text description regarding Parents job title and job details.(sl)">
+				>
+				["at0005"] = <
+					text = <"Težki življenjski dogodki">
+					description = <"**(sl)">
+				>
+				["at0006"] = <
+					text = <"Stanovanjske razmere">
+					description = <"**(sl)">
+				>
+				["at0007"] = <
+					text = <"Psihiatrični dogodki">
+					description = <"**(sl)">
+				>
+				["at0008"] = <
+					text = <"Šola">
+					description = <"**(sl)">
+				>
+				["at0009"] = <
+					text = <"Ostalo">
+					description = <"**(sl)">
+				>
+				["at0010"] = <
+					text = <"Opis">
+					description = <"**(sl)">
+				>
+				["at0011"] = <
+					text = <"Poskus samomora">
+					description = <"**(sl)">
+				>
+				["at0012"] = <
+					text = <"*Suicide attempt details(sl)">
+					description = <"**(sl)">
+				>
+				["at0013"] = <
+					text = <"Zloraba drog, alkoholizem, kajenje">
+					description = <"**(en)">
+				>
+				["at0015"] = <
+					text = <"Sum na trpinčenega otroka">
+					description = <"*Is child abuse suspected?(en)">
+				>
+			>
+		>
+	>
