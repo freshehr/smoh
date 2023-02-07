@@ -1,0 +1,239 @@
+archetype (adl_version=1.4; uid=928a6d78-a7ee-36d3-a5dc-7b53438160dc)
+	openEHR-EHR-OBSERVATION.fluid_output.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["application"] = <"Adl Designer">
+			>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"11/11/2009">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Sam Heard, Ocean Informatics, Australia","Heather Leslie, Ocean Informatics, Australia">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record findings of, and measurements of  actual or estimated fluid substance output.">
+			keywords = <"production","output","fluid","fluid balance","input output","io">
+			use = <"Use to record fluid output as part of routine nursing care or in more specialised circumstances such as burns management.
+May be used for descriptive assessments of an output or to record detailed amounts and totals over a period.
+
+Used in combination with CLUSTER.bodily_output.v1 to describe the bodily substance involved.">
+			misuse = <"Do not use to record fluid input.">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"E98356742B553D5A0B384FBA2D004884">
+		["build_uid"] = <"701f201d-d9f1-3b8d-8fb8-49072aae1ac9">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Fluid output
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..*} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- List
+								items cardinality matches {1..*; unordered} matches {
+									allow_archetype CLUSTER[at0016] occurrences matches {0..1} matches {    -- Fluid detail
+										include
+											archetype_id/value matches {/openEHR-EHR-CLUSTER\.bodily_substance(-[a-zA-Z0-9_]+)*\.v1/}
+										exclude
+											archetype_id/value matches {/.*/}
+									}
+								}
+							}
+						}
+					}
+					INTERVAL_EVENT[at0006] occurrences matches {0..*} matches {    -- Total
+						math_function matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[openehr::148]
+								}
+							}
+						}
+						data matches {
+							use_node ITEM_TREE /data[at0001]/events[at0002]/data[at0003]
+						}
+					}
+					INTERVAL_EVENT[at0007] occurrences matches {0..*} matches {    -- Actual
+						math_function matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[openehr::640]
+								}
+							}
+						}
+						data matches {
+							use_node ITEM_TREE /data[at0001]/events[at0002]/data[at0003]
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0008] matches {    -- List
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0031] occurrences matches {0..1} matches {    -- Measurement precision
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0018,    -- Estimated
+									at0019,    -- Measured
+									at0020]    -- Stated
+								}
+							}
+						}
+					}
+					allow_archetype CLUSTER[at0028] occurrences matches {0..1} matches {    -- Measurement device
+						include
+							archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1/}
+						exclude
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Fluid output">
+					description = <"Recording of findings and measurement (or estimation) of bodily output such as fluid output and defaecation.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"The estimation of fluid output without specifying the period of time.">
+				>
+				["at0003"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0006"] = <
+					text = <"Total">
+					description = <"For recording total fluid output over a period (may transcend a number of interval or point in time records).">
+				>
+				["at0007"] = <
+					text = <"Actual">
+					description = <"For recording the fluid output over a period of time when this will later be totalled.">
+				>
+				["at0008"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0016"] = <
+					text = <"Fluid detail">
+					description = <"Details of the fluid or substance observed being observed.">
+				>
+				["at0018"] = <
+					text = <"Estimated">
+					description = <"The fluid volume has been estimated.">
+				>
+				["at0019"] = <
+					text = <"Measured">
+					description = <"The fluid volume has been directly measured.">
+				>
+				["at0020"] = <
+					text = <"Stated">
+					description = <"The fluid output has been stated.">
+				>
+				["at0028"] = <
+					text = <"Measurement device">
+					description = <"Details of device used to measure the fluid output.">
+				>
+				["at0031"] = <
+					text = <"Measurement precision">
+					description = <"Records the level of precision of the fluid output observation.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Fluid output(en)">
+					description = <"*Recording of findings and measurement (or estimation) of bodily output such as fluid output and defaecation.(en)">
+				>
+				["at0001"] = <
+					text = <"*Event Series(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"*Any event(en)">
+					description = <"*The estimation of fluid output without specifying the period of time.(en)">
+				>
+				["at0003"] = <
+					text = <"*List(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0006"] = <
+					text = <"*Total(en)">
+					description = <"*For recording total fluid output over a period (may transcend a number of interval or point in time records).(en)">
+				>
+				["at0007"] = <
+					text = <"*Actual(en)">
+					description = <"*For recording the fluid output over a period of time when this will later be totalled.(en)">
+				>
+				["at0008"] = <
+					text = <"*List(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0016"] = <
+					text = <"*Fluid detail(en)">
+					description = <"*Details of the fluid or substance observed being observed.(en)">
+				>
+				["at0018"] = <
+					text = <"*Estimated(en)">
+					description = <"*The fluid volume has been estimated.(en)">
+				>
+				["at0019"] = <
+					text = <"*Measured(en)">
+					description = <"*The fluid volume has been directly measured.(en)">
+				>
+				["at0020"] = <
+					text = <"*Stated(en)">
+					description = <"*The fluid output has been stated.(en)">
+				>
+				["at0028"] = <
+					text = <"*Measurement device (en)">
+					description = <"*Details of device used to measure the fluid output.(en)">
+				>
+				["at0031"] = <
+					text = <"*Measurement precision(en)">
+					description = <"*Records the level of precision of the fluid output observation.(en)">
+				>
+			>
+		>
+	>
