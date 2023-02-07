@@ -1,0 +1,118 @@
+archetype (adl_version=1.4; uid=653e316c-c939-374f-b914-a8e67d11011b)
+	openEHR-EHR-CLUSTER.nursing_process_action_zn.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["application"] = <"Adl Designer">
+			>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["name"] = <"">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record additional Nursing process infrastructure for ZN nursing ACTION archetypes.">
+			keywords = <"process", ...>
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"2142E7A4864B7E630ECD228378052435">
+		["build_uid"] = <"32e6e208-939a-39be-9c65-eab76465001c">
+	>
+
+definition
+	CLUSTER[at0000] matches {    -- Nursing process Action
+		items cardinality matches {1..*; unordered} matches {
+			allow_archetype CLUSTER[at0019] occurrences matches {0..*} matches {    -- Notification
+				include
+					archetype_id/value matches {/openEHR-EHR-CLUSTER\.distribution(-[a-zA-Z0-9_]+)*\.v1/}
+			}
+			CLUSTER[at0009] occurrences matches {0..*} matches {    -- Material used
+				items cardinality matches {1..*; unordered} matches {
+					ELEMENT[at0010] occurrences matches {0..1} matches {    -- Material name
+						value matches {
+							DV_CODED_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0012] occurrences matches {0..1} matches {    -- Quantity
+						value matches {
+							DV_QUANTITY matches {*}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Nursing process Action">
+					description = <"Nursing process infrastructure for ZN nursing ACTION archetypes.">
+				>
+				["at0009"] = <
+					text = <"Material used">
+					description = <"Details of materials used during the intervention.">
+				>
+				["at0010"] = <
+					text = <"Material name">
+					description = <"The name of the material used">
+				>
+				["at0012"] = <
+					text = <"Quantity">
+					description = <"The quantity of material used - default derived from EAN terminology.">
+				>
+				["at0019"] = <
+					text = <"Notification">
+					description = <"Persons notified of the intervention.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Nursing process Action(en)">
+					description = <"*Nursing process infrastructure for ZN nursing ACTION archetypes.(en)">
+				>
+				["at0009"] = <
+					text = <"*Material used(en)">
+					description = <"*Details of materials used during the intervention.(en)">
+				>
+				["at0010"] = <
+					text = <"*Material name(en)">
+					description = <"*The name of the material used(en)">
+				>
+				["at0012"] = <
+					text = <"*Quantity(en)">
+					description = <"*The quantity of material used - default derived from EAN terminology.(en)">
+				>
+				["at0019"] = <
+					text = <"*Notification(en)">
+					description = <"*Persons notified of the intervention.(en)">
+				>
+			>
+		>
+	>
