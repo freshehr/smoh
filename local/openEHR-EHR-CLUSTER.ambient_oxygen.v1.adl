@@ -1,0 +1,171 @@
+archetype (adl_version=1.4; uid=82a6aa5b-db0d-3ac2-9dc5-2d22b17c3d08)
+	openEHR-EHR-CLUSTER.ambient_oxygen.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["de"] = <
+			language = <[ISO_639-1::de]>
+			author = <
+				["name"] = <"Jasmin Buck, Sebastian Garde">
+				["organisation"] = <"University of Heidelberg, Central Queensland University">
+			>
+		>
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"?">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"08/06/2009">
+		["name"] = <"Ian McNicoll">
+		["organisation"] = <"Ocean Informatics">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Heather Leslie, Ocean Informatics, Australia","Sebastian Garde, Ocean Informatics, Germany","Andrew James, University of Toronto, Canada","Sundarasan Jaganathan NHS Scotland, United Kingdom","Omer Hotomargolu,, Turkey","Marja Buur, Medisch Centrum Alkmaar, Netherlands","Gregory Caulton PatientOS Inc., USA","Anne Harbison, CPCER, Australia","Sam Heard, Ocean Informatics, Australia">
+	details = <
+		["de"] = <
+			language = <[ISO_639-1::de]>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record the amount of oxygen being delivered to the subject at the time of observation.  Assumed values of 21% O2, Fi02 of 0.21 and Oxygen flow rate of zero.">
+			keywords = <"breathing","oxygen">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"May be used within an ACTION archetype to specificy oxygen therapy , or within OBSERVATION archetypes such as Blood gases or Respirations, as part of patient state, where knowledge of ambient oxygen status is critical to interpretation of the observation. 
+
+
+">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"752568766EDC800765CC04A55D8F824D">
+		["build_uid"] = <"4350e190-a8d2-3c2c-a876-df71d022d054">
+	>
+
+definition
+	CLUSTER[at0000] matches {    -- Ambient oxygen
+		items cardinality matches {1..*; unordered} matches {
+			ELEMENT[at0051] occurrences matches {0..1} matches {    -- Oxygen flow rate
+				value matches {
+					C_DV_QUANTITY <
+						property = <[openehr::126]>
+						list = <
+							["1"] = <
+								units = <"l/m">
+								magnitude = <|0.0..50.0|>
+								precision = <|1|>
+							>
+							["2"] = <
+								units = <"ml/min">
+								magnitude = <|0.0..50000.0|>
+								precision = <|1|>
+							>
+						>
+
+						assumed_value = <
+							units = <"l/m">
+							magnitude = <0.0>
+							precision = <1>
+						>
+					>
+				}
+			}
+			ELEMENT[at0052] occurrences matches {0..1} matches {    -- FiO2
+				value matches {
+					DV_PROPORTION matches {
+						numerator matches {|0.0..1.0|}
+						is_integral matches {false}
+						type matches {1}
+					}
+				}
+			}
+			ELEMENT[at0053] occurrences matches {0..1} matches {    -- Percent O2
+				value matches {
+					DV_PROPORTION matches {
+						numerator matches {|0.0..100.0|}
+						is_integral matches {false}
+						type matches {2}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["de"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Ambient oxygen(en)">
+					description = <"*The amount of oxygen being delivered to the subject at the time of observation.  Assumed values of 21% O2, Fi02 of 0.21 and Oxygen flow rate of zero.(en)">
+				>
+				["at0051"] = <
+					text = <"*Oxygen flow rate(en)">
+					description = <"*Flow rate of inspired oxygen.(en)">
+				>
+				["at0052"] = <
+					text = <"*FiO2(en)">
+					description = <"*Fraction of inspired oxygen.(en)">
+				>
+				["at0053"] = <
+					text = <"*Percent O2(en)">
+					description = <"*Percentage of inspired oxygen.(en)">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Kisik">
+					description = <"Količina kiska, ki jo dobil pacient v času opazovanja">
+				>
+				["at0051"] = <
+					text = <"Pretok O2">
+					description = <"Pretok O2">
+				>
+				["at0052"] = <
+					text = <"FiO2">
+					description = <"FiO2 (Fraction of inspired oxygen)">
+				>
+				["at0053"] = <
+					text = <"FiO2 (%)">
+					description = <"O2 (%) (Percentage of inspired oxygen)">
+				>
+			>
+		>
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Ambient oxygen">
+					description = <"The amount of oxygen being delivered to the subject at the time of observation.  Assumed values of 21% O2, Fi02 of 0.21 and Oxygen flow rate of zero.">
+				>
+				["at0051"] = <
+					text = <"Oxygen flow rate">
+					description = <"Flow rate of inspired oxygen.">
+				>
+				["at0052"] = <
+					text = <"FiO2">
+					description = <"Fraction of inspired oxygen.">
+				>
+				["at0053"] = <
+					text = <"Percent O2">
+					description = <"Percentage of inspired oxygen.">
+				>
+			>
+		>
+	>
