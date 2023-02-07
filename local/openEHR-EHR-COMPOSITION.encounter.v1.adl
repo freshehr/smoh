@@ -1,0 +1,102 @@
+archetype (adl_version=1.4; uid=dd320b59-b6f5-300f-ba95-2f390917d53a)
+	openEHR-EHR-COMPOSITION.encounter.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"?">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"2005-10-10">
+		["name"] = <"Thomas Beale">
+		["organisation"] = <"Ocean Informatics">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			purpose = <"Record of encounter as a progress note.">
+			keywords = <"progress","note","encounter">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"Record of encounter as a progress note.">
+			keywords = <"progress","note","encounter">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"406AC9810216464C188E2EA6810C2BE6">
+		["build_uid"] = <"e79679e6-8069-3aff-af07-a8645a7b634d">
+	>
+
+definition
+	COMPOSITION[at0000] matches {    -- Encounter
+		category matches {
+			DV_CODED_TEXT matches {
+				defining_code matches {
+					[openehr::433]
+				}
+			}
+		}
+		context matches {
+			EVENT_CONTEXT matches {
+				other_context matches {
+					ITEM_TREE[at0001] matches {    -- Tree
+						items cardinality matches {0..*; unordered} matches {
+							allow_archetype CLUSTER[at0002] occurrences matches {0..*} matches {    -- Context detail
+								include
+									archetype_id/value matches {/.*/}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Encounter">
+					description = <"Generic encounter or progress note composition">
+				>
+				["at0001"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Context detail">
+					description = <"Local context detail.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"Encounter">
+					description = <"Generic encounter or progress note composition">
+				>
+				["at0001"] = <
+					text = <"Tree">
+					description = <"Tree">
+				>
+				["at0002"] = <
+					text = <"Context detail">
+					description = <"Local context detail">
+				>
+			>
+		>
+	>
