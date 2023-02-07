@@ -1,0 +1,56 @@
+archetype (adl_version=1.4; uid=acd65b98-a06a-3cef-8199-c473e7e032ad)
+	openEHR-EHR-SECTION.conclusion.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["date"] = <"11/04/2007">
+		["name"] = <"Heather Leslie">
+		["organisation"] = <"Ocean Informatics">
+		["email"] = <"heather.leslie@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"Section to bring together all archetypes involved in recording the conclusion in an encounter with a patient">
+			keywords = <"diagnosis","differential diagnosis">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+		>
+	>
+	other_details = <
+		["references"] = <"">
+		["MD5-CAM-1.0.1"] = <"8e3a116d4094ee354022888959ca6b97">
+		["build_uid"] = <"1f38acb4-9ee5-31f9-baf0-bf8bc640a70c">
+	>
+
+definition
+	SECTION[at0000] matches {    -- Conclusion
+		items cardinality matches {0..*; unordered} matches {
+			allow_archetype EVALUATION[at0001] occurrences matches {0..*} matches {    -- Evaluation of a problem, diagnosis etc.
+				include
+					archetype_id/value matches {/openEHR-EHR-EVALUATION\.differential_diagnosis\.v1|openEHR-EHR-EVALUATION\.problem\.v1|openEHR-EHR-EVALUATION\.problem-diagnosis\.v1/}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Conclusion">
+					description = <"Section to record conclusions of an encounter with a patient">
+				>
+				["at0001"] = <
+					text = <"Evaluation of a problem, diagnosis etc.">
+					description = <"*">
+				>
+			>
+		>
+	>
