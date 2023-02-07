@@ -1,0 +1,238 @@
+archetype (adl_version=1.4; uid=ab42b2ec-124e-3490-98c6-5fcb2b2a245e)
+	openEHR-EHR-CLUSTER.physical_properties.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["application"] = <"Adl Designer">
+			>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"27/01/2009">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"openEHR Archetype Editorial Group / Ocean Informatics">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Sam Heard Ocean Informatics","Heather Leslie Ocean Informatics">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			other_details = <
+				["notes"] = <"Generated automatically by Adl Designer">
+			>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record the physical properties of an object such as a body part, specimen or lesion.">
+			keywords = <"specimen","laboratory","sample","pathology","object","device","implant">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"To record physical details of a body part, device, device, lesion or specimen.">
+			misuse = <"Do not use to record whole body weight / height whether actual or adjusted or other overall estimates of bidy size such as waist/ girth measurement.">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"BD3CD34E15701855976007A372C4685B">
+		["build_uid"] = <"66b0cb88-a288-36fa-9a01-9044c06e804d">
+	>
+
+definition
+	CLUSTER[at0000] matches {    -- Physical properties of an object
+		items cardinality matches {1..*; unordered} matches {
+			ELEMENT[at0036] occurrences matches {0..1} matches {    -- Physical object name
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0020] occurrences matches {0..1} matches {    -- Weight
+				value matches {
+					C_DV_QUANTITY <
+						property = <[openehr::124]>					>
+				}
+			}
+			CLUSTER[at0037] occurrences matches {0..1} matches {    -- Dimensions
+				items cardinality matches {1..*; unordered} matches {
+					ELEMENT[at0034] occurrences matches {0..1} matches {    -- Diameter
+						value matches {
+							C_DV_QUANTITY <
+								property = <[openehr::122]>							>
+						}
+					}
+					ELEMENT[at0032] occurrences matches {0..1} matches {    -- Circumference
+						value matches {
+							C_DV_QUANTITY <
+								property = <[openehr::122]>							>
+						}
+					}
+					ELEMENT[at0029] occurrences matches {0..1} matches {    -- Length
+						value matches {
+							C_DV_QUANTITY <
+								property = <[openehr::122]>							>
+						}
+					}
+					ELEMENT[at0031] occurrences matches {0..1} matches {    -- Breadth
+						value matches {
+							C_DV_QUANTITY <
+								property = <[openehr::122]>							>
+						}
+					}
+					ELEMENT[at0030] occurrences matches {0..1} matches {    -- Depth
+						value matches {
+							C_DV_QUANTITY <
+								property = <[openehr::122]>							>
+						}
+					}
+					ELEMENT[at0035] occurrences matches {0..1} matches {    -- Area
+						value matches {
+							C_DV_QUANTITY <
+								property = <[openehr::335]>							>
+						}
+					}
+					ELEMENT[at0033] occurrences matches {0..1} matches {    -- Volume
+						value matches {
+							C_DV_QUANTITY <
+								property = <[openehr::129]>							>
+						}
+					}
+				}
+			}
+			ELEMENT[at0023] occurrences matches {0..1} matches {    -- Description
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0038] occurrences matches {0..1} matches {    -- Image
+				value matches {
+					DV_MULTIMEDIA matches {*}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Physical properties of an object">
+					description = <"To record the phycial properties of an object such as a body part, specimen or lesion.">
+				>
+				["at0020"] = <
+					text = <"Weight">
+					description = <"Weight of the object.">
+				>
+				["at0023"] = <
+					text = <"Description">
+					description = <"A text description of other physical characteristics of the object.  Do not use to record characteristics that might affect the quality of a test interpretation - use 'Specimen received issues' in the Specimen archetype for this purpose.">
+				>
+				["at0029"] = <
+					text = <"Length">
+					description = <"Length of the object.">
+				>
+				["at0030"] = <
+					text = <"Depth">
+					description = <"Depth of the object.">
+				>
+				["at0031"] = <
+					text = <"Breadth">
+					description = <"Breadth of the object.">
+				>
+				["at0032"] = <
+					text = <"Circumference">
+					description = <"Circumference of the object.">
+				>
+				["at0033"] = <
+					text = <"Volume">
+					description = <"Volume of the object.">
+				>
+				["at0034"] = <
+					text = <"Diameter">
+					description = <"Diameter of the object.">
+				>
+				["at0035"] = <
+					text = <"Area">
+					description = <"Area of the object.">
+				>
+				["at0036"] = <
+					text = <"Physical object name">
+					description = <"The object concerned. May be a body part, device or specimen.">
+				>
+				["at0037"] = <
+					text = <"Dimensions">
+					description = <"The dimensions of the object.">
+				>
+				["at0038"] = <
+					text = <"Image">
+					description = <"An image of the object.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0000"] = <
+					text = <"*Physical properties of an object(en)">
+					description = <"*To record the phycial properties of an object such as a body part, specimen or lesion.(en)">
+				>
+				["at0020"] = <
+					text = <"*Weight(en)">
+					description = <"*Weight of the object.(en)">
+				>
+				["at0023"] = <
+					text = <"*Description(en)">
+					description = <"*A text description of other physical characteristics of the object.  Do not use to record characteristics that might affect the quality of a test interpretation - use 'Specimen received issues' in the Specimen archetype for this purpose.(en)">
+				>
+				["at0029"] = <
+					text = <"*Length(en)">
+					description = <"*Length of the object.(en)">
+				>
+				["at0030"] = <
+					text = <"*Depth(en)">
+					description = <"*Depth of the object.(en)">
+				>
+				["at0031"] = <
+					text = <"*Breadth(en)">
+					description = <"*Breadth of the object.(en)">
+				>
+				["at0032"] = <
+					text = <"*Circumference(en)">
+					description = <"*Circumference of the object.(en)">
+				>
+				["at0033"] = <
+					text = <"*Volume(en)">
+					description = <"*Volume of the object.(en)">
+				>
+				["at0034"] = <
+					text = <"*Diameter(en)">
+					description = <"*Diameter of the object.(en)">
+				>
+				["at0035"] = <
+					text = <"*Area(en)">
+					description = <"*Area of the object.(en)">
+				>
+				["at0036"] = <
+					text = <"*Physical object name(en)">
+					description = <"*The object concerned. May be a body part, device or specimen.(en)">
+				>
+				["at0037"] = <
+					text = <"*Dimensions(en)">
+					description = <"*The dimensions of the object.(en)">
+				>
+				["at0038"] = <
+					text = <"*Image(en)">
+					description = <"*An image of the object.(en)">
+				>
+			>
+		>
+	>
