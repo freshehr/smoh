@@ -1,0 +1,149 @@
+archetype (adl_version=1.4; uid=e2b8d629-9191-3d1d-ae48-666cdf585d90)
+	openEHR-DEMOGRAPHIC-ROLE.health_provider_organisation.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::pt-br]>
+	translations = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			author = <
+				["name"] = <"Sergio Miranda Freire">
+				["organisation"] = <"Universidade do Estado do Rio de Janeiro - UERJ">
+				["email"] = <"sergio@lampada.uerj.br">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"22/05/2009">
+		["name"] = <"Sergio Miranda Freire & Rigoleta Dutra Mediano Dias">
+		["organisation"] = <"Universidade do Estado do Rio de Janeiro - UERJ">
+		["email"] = <"sergio@lampada.uerj.br">
+	>
+	lifecycle_state = <"Authordraft">
+	details = <
+		["pt-br"] = <
+			language = <[ISO_639-1::pt-br]>
+			purpose = <"Representação dos dados de uma Organização ao atual no papel de prestador de assistência à saúde">
+			keywords = <"serviço demográfico","organização prestadora de assistência à saúde">
+			copyright = <"copyright (c) 2010 openEHR foundation">
+			use = <"Usado em serviços de demografia para coletar dados demográficos sobre uma organização no papel de prestador de assistência à saúde">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"Representation of an organisations's demographic data in the role of health provider">
+			keywords = <"demographic service","health provider organisation">
+			copyright = <"copyright (c) 2010 openEHR foundation">
+			use = <"Used in demographic service to collect demographic data about an organisation in the role of health provider">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"9c1507f044d33694f2a71be714eb7aaa">
+		["build_uid"] = <"32dca572-9d33-3167-9cae-65efd54357fe">
+	>
+
+definition
+	ROLE[at0000] matches {    -- Prestador de assistência à saúde
+		details matches {
+			ITEM_TREE[at0001] occurrences matches {0..1} matches {    -- Identificadores
+				items cardinality matches {1..*; unordered; unique} matches {
+					allow_archetype CLUSTER[at0010] occurrences matches {1..*} matches {    -- Identificador
+						include
+							archetype_id/value matches {/(provider_identifier)[a-zA-Z0-9_-]*\.v1/}
+					}
+				}
+			}
+		}
+		identities cardinality matches {1..*; ordered} matches {
+			allow_archetype PARTY_IDENTITY[at0002] occurrences matches {1..*} matches {    -- Identificação
+				include
+					archetype_id/value matches {/(organisation_name)[a-zA-Z0-9_-]*\.v1/}
+			}
+		}
+		relationships cardinality matches {0..*; ordered} matches {
+			PARTY_RELATIONSHIP[at0003] matches {    -- Relacionamento com fonte pagadora
+				details matches {
+					ITEM_TREE[at0030] occurrences matches {0..1} matches {    -- Detalhes
+						items cardinality matches {1..*; ordered} matches {
+							allow_archetype CLUSTER[at0031] occurrences matches {0..1} matches {    -- Identificador
+								include
+									archetype_id/value matches {/(provider_identifier)[a-zA-Z0-9_-]*\.v1/}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["pt-br"] = <
+			items = <
+				["at0000"] = <
+					text = <"Prestador de assistência à saúde">
+					description = <"Organização no papel de um prestador de assistência à saúde">
+				>
+				["at0001"] = <
+					text = <"Identificadores">
+					description = <"Identificadores utilizados pela organização quando atua como prestador de assistência à saúde">
+				>
+				["at0002"] = <
+					text = <"Identificação">
+					description = <"Especifica como a organização prestadora de assistência à saúde é conhecido">
+				>
+				["at0003"] = <
+					text = <"Relacionamento com fonte pagadora">
+					description = <"Relacionamento entre a organização prestadora de assistência e uma fonte pagadora">
+				>
+				["at0010"] = <
+					text = <"Identificador">
+					description = <"Identificador utilizado pelo prestador no relacionamento com a fonte pagadora">
+				>
+				["at0030"] = <
+					text = <"Detalhes">
+					description = <"Detalhes do relacionamento">
+				>
+				["at0031"] = <
+					text = <"Identificador">
+					description = <"Identificador utilizado pelo prestador no relacionamento com a fonte pagadora">
+				>
+			>
+		>
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Health Provider">
+					description = <"Organisation in the role of a health provider">
+				>
+				["at0001"] = <
+					text = <"Identifiers">
+					description = <"The identifiers used by the organisation acting as a health provider organisation">
+				>
+				["at0002"] = <
+					text = <"Identification">
+					description = <"Indicates how the health provider organisation is known by">
+				>
+				["at0003"] = <
+					text = <"Third-party payer relationship">
+					description = <"relationship between the health provider organisation and a third-party payer">
+				>
+				["at0010"] = <
+					text = <"Identifier">
+					description = <"The identifier used by the organisation acting as a health provider organisation">
+				>
+				["at0030"] = <
+					text = <"Details">
+					description = <"Relationship details">
+				>
+				["at0031"] = <
+					text = <"identifier used in the relationship">
+					description = <"Identifier used by the health provider in the relationship with the third-party payer">
+				>
+			>
+		>
+	>
