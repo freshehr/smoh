@@ -1,0 +1,94 @@
+archetype (adl_version=1.4; uid=c8e3fe98-7325-31a9-b2e0-2ce0e81ec2f6)
+	OpenEHR-EHR-EVALUATION.test.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en-gb]>
+
+description
+	original_author = <
+		["date"] = <"20100422">
+	>
+	lifecycle_state = <"Draft">
+	details = <
+		["en-gb"] = <
+			language = <[ISO_639-1::en-gb]>
+			purpose = <"Archetype purpose">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"6b361e13feba0e25edf96e16662b69b4">
+		["build_uid"] = <"663ac7fc-6faa-3e05-a05a-13dd23632a98">
+	>
+
+definition
+	EVALUATION[at0000] matches {    -- test
+		links cardinality matches {0..*; unordered; unique} matches {
+			LINK[at0001] occurrences matches {0..*} matches {    -- LINK
+				meaning matches {
+					DV_TEXT[at0002] occurrences matches {0..1} matches {*}    -- DV_TEXT
+				}
+				target matches {
+					DV_EHR_URI[at0003] occurrences matches {0..1} matches {*}    -- DV_EHR_URI
+				}
+				type matches {
+					DV_TEXT[at0004] occurrences matches {0..1} matches {    -- DV_TEXT
+						mappings cardinality matches {0..*; unordered; unique} matches {
+							TERM_MAPPING[at0005] occurrences matches {0..*} matches {    -- TERM_MAPPING
+								match matches {"="}
+								target matches {
+									CODE_PHRASE[at0006] occurrences matches {0..1} matches {*}    -- CODE_PHRASE
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	terminologies_available = <"SNOMED-CT", ...>
+	term_definitions = <
+		["en-gb"] = <
+			items = <
+				["at0000"] = <
+					text = <"test">
+					description = <"test">
+				>
+				["at0001"] = <
+					text = <"LINK">
+					description = <"This is a LINK object">
+				>
+				["at0002"] = <
+					text = <"DV_TEXT">
+					description = <"This is a DV_TEXT object">
+				>
+				["at0003"] = <
+					text = <"DV_EHR_URI">
+					description = <"This is a DV_EHR_URI object">
+				>
+				["at0004"] = <
+					text = <"DV_TEXT">
+					description = <"This is a DV_TEXT object">
+				>
+				["at0005"] = <
+					text = <"TERM_MAPPING">
+					description = <"This is a TERM_MAPPING object">
+				>
+				["at0006"] = <
+					text = <"CODE_PHRASE">
+					description = <"This is a CODE_PHRASE object">
+				>
+			>
+		>
+	>
+	term_binding = <
+		["SNOMED-CT"] = <
+			items = <
+				["at0006"] = <[SNOMED-CT::1234567]>
+			>
+		>
+	>
