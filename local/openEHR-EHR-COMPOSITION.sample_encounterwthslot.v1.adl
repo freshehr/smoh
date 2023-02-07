@@ -1,0 +1,82 @@
+archetype (adl_version=1.4; uid=e51ef901-f88e-3f63-b68a-fc90901cdf85)
+	openEHR-EHR-COMPOSITION.sample_encounterwthslot.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	original_author = <
+		["date"] = <"2005-10-10">
+		["name"] = <"Thomas Beale">
+		["organisation"] = <"Ocean Informatics">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"Record of encounter as a progress note.">
+			keywords = <"progress","note","encounter">
+			use = <"Training purposes only">
+			misuse = <"NOT FOR LIVE USE">
+		>
+	>
+	other_details = <
+		["references"] = <"">
+		["MD5-CAM-1.0.1"] = <"385E9C558346A7E8205D43F0D6A4615B">
+		["build_uid"] = <"ea02babc-d29e-385a-8210-aa5deddb9454">
+	>
+
+definition
+	COMPOSITION[at0000] matches {    -- Test Composition Archetype wth slot
+		category matches {
+			DV_CODED_TEXT matches {
+				defining_code matches {
+					[openehr::433]
+				}
+			}
+		}
+		context matches {
+			EVENT_CONTEXT matches {
+				other_context matches {
+					ITEM_TREE[at0001] matches {    -- Tree
+						items cardinality matches {0..*; unordered} matches {
+							CLUSTER[at0006] occurrences matches {0..1} matches {*}    -- Blood Pressure Container
+						}
+					}
+				}
+			}
+		}
+		content cardinality matches {0..*; unordered} matches {
+			allow_archetype OBSERVATION[at0007] occurrences matches {0..*} matches {    -- OBSERVATION Test Obsvr
+				include
+					archetype_id/value matches {/.*/}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Test Composition Archetype wth slot">
+					description = <"Generic encounter or progress note composition">
+				>
+				["at0001"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0006"] = <
+					text = <"Blood Pressure Container">
+					description = <"*">
+				>
+				["at0007"] = <
+					text = <"OBSERVATION Test Obsvr">
+					description = <"*">
+				>
+			>
+		>
+	>
