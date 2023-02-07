@@ -1,0 +1,340 @@
+archetype (adl_version=1.4; uid=ddee7d75-aef4-3942-b10f-0121ac1a1ba3)
+	openEHR-EHR-OBSERVATION.fluid_output-urine.v1
+specialize
+	openEHR-EHR-OBSERVATION.fluid_output.v1
+
+concept
+	[at0000.1]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"?">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"11/11/2009">
+		["name"] = <"Dr Ian McNicoll">
+		["organisation"] = <"Ocean Informatics, United Kingdom">
+		["email"] = <"ian.mcnicoll@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	other_contributors = <"Sam Heard, Ocean Informatics, Australia","Heather Leslie, Ocean Informatics, Australia">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record findings of, and measurements of urine output.">
+			keywords = <"production","output","fluid","fluid balance","input output","io","urine","micturition">
+			use = <"Use to record urine output as part of routine nursing care or in more specialised circumstances such as burns management.
+May be used for descriptive assessments of an output or to record detailed amounts and totals over a period.
+
+Used in combination with CLUSTER.bodily_output-urine.v1 to describe the urine.">
+			misuse = <"Do not use to record fluid input.">
+		>
+	>
+	other_details = <
+		["MD5-CAM-1.0.1"] = <"7772DB02B62A7E1C761EDF92C9410E11">
+		["build_uid"] = <"b4ce565d-df8b-3163-a4c8-b785075ceed6">
+	>
+
+definition
+	OBSERVATION[at0000.1] matches {    -- Urination
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					EVENT[at0002] occurrences matches {0..*} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- List
+								items cardinality matches {1..*; unordered} matches {
+									allow_archetype CLUSTER[at0016.1] occurrences matches {0..1} matches {    -- Urine details
+										include
+											archetype_id/value matches {/openEHR-EHR-CLUSTER\.bodily_substance-urine(-[a-zA-Z0-9_]+)*\.v1/}
+									}
+									CLUSTER[at0.2] occurrences matches {0..1} matches {    -- Voiding
+										items cardinality matches {1..*; unordered} matches {
+											ELEMENT[at0.3] occurrences matches {0..1} matches {    -- Passed urine
+												value matches {
+													DV_BOOLEAN matches {*}
+												}
+											}
+											ELEMENT[at0.4] occurrences matches {0..1} matches {    -- Time urine last passed
+												value matches {
+													DV_DATE_TIME matches {*}
+												}
+											}
+											ELEMENT[at0.5] occurrences matches {0..1} matches {    -- Period since urine last passed
+												value matches {
+													DV_DURATION matches {
+														value matches {|>=PT0S|}
+													}
+												}
+											}
+										}
+									}
+									CLUSTER[at0.6] occurrences matches {0..1} matches {    -- Urinary difficulty
+										items cardinality matches {1..*; unordered} matches {
+											ELEMENT[at0.9] occurrences matches {0..1} matches {    -- Degree of difficulty
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											ELEMENT[at0.7] occurrences matches {0..1} matches {    -- Description
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					INTERVAL_EVENT[at0006] occurrences matches {0..*} matches {    -- Total
+						math_function matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[openehr::148]
+								}
+							}
+						}
+						data matches {
+							use_node ITEM_TREE /data[at0001]/events[at0002]/data[at0003]
+						}
+					}
+					INTERVAL_EVENT[at0007] occurrences matches {0..*} matches {    -- Actual
+						math_function matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[openehr::640]
+								}
+							}
+						}
+						data matches {
+							use_node ITEM_TREE /data[at0001]/events[at0002]/data[at0003]
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_TREE[at0008] matches {    -- List
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0031] occurrences matches {0..1} matches {    -- Measurement precision
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0018,    -- Estimated
+									at0019,    -- Measured
+									at0020]    -- Stated
+								}
+							}
+						}
+					}
+					allow_archetype CLUSTER[at0028] occurrences matches {0..1} matches {    -- Measurement device
+						include
+							archetype_id/value matches {/openEHR-EHR-CLUSTER\.device(-[a-zA-Z0-9_]+)*\.v1/}
+						exclude
+							archetype_id/value matches {/.*/}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0.2"] = <
+					text = <"Voiding">
+					description = <"Findings related to passing urine.">
+				>
+				["at0.3"] = <
+					text = <"Passed urine">
+					description = <"Has the subject passed urine?">
+				>
+				["at0.4"] = <
+					text = <"Time urine last passed">
+					description = <"The date and/or time that urine was last passed.">
+				>
+				["at0.5"] = <
+					text = <"Period since urine last passed">
+					description = <"The period elapsed since urine was last passed.">
+				>
+				["at0.6"] = <
+					text = <"Urinary difficulty">
+					description = <"Findings related to difficulty passing urine.">
+				>
+				["at0.7"] = <
+					text = <"Description">
+					description = <"Description of any urinary difficulty experienced by the subject.">
+				>
+				["at0.9"] = <
+					text = <"Degree of difficulty">
+					description = <"Degree of difficulty passing urine.">
+				>
+				["at0000"] = <
+					text = <"Fluid output">
+					description = <"Recording of findings and measurement (or estimation) of bodily output such as fluid output and defaecation.">
+				>
+				["at0000.1"] = <
+					text = <"Urination">
+					description = <"Recording of findings  of urine output.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"The estimation of fluid output without specifying the period of time.">
+				>
+				["at0003"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0006"] = <
+					text = <"Total">
+					description = <"For recording total fluid output over a period (may transcend a number of interval or point in time records).">
+				>
+				["at0007"] = <
+					text = <"Actual">
+					description = <"For recording the fluid output over a period of time when this will later be totalled.">
+				>
+				["at0008"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0016"] = <
+					text = <"Fluid detail">
+					description = <"Details of the fluid or substance observed being observed.">
+				>
+				["at0016.1"] = <
+					text = <"Urine details">
+					description = <"Details of the urine.">
+				>
+				["at0018"] = <
+					text = <"Estimated">
+					description = <"The fluid volume has been estimated.">
+				>
+				["at0019"] = <
+					text = <"Measured">
+					description = <"The fluid volume has been directly measured.">
+				>
+				["at0020"] = <
+					text = <"Stated">
+					description = <"The fluid output has been stated.">
+				>
+				["at0028"] = <
+					text = <"Measurement device">
+					description = <"Details of device used to measure the fluid output.">
+				>
+				["at0031"] = <
+					text = <"Measurement precision">
+					description = <"Records the level of precision of the fluid output observation.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0.2"] = <
+					text = <"Izločanje urina">
+					description = <"Ugotovitve glede izločanja urina">
+				>
+				["at0.3"] = <
+					text = <"Uriniral">
+					description = <"Ali j epacient že uriniral?">
+				>
+				["at0.4"] = <
+					text = <"Zadnja mikcija">
+					description = <"Kdaj je bilo zadnje uriniranje?">
+				>
+				["at0.5"] = <
+					text = <"Čas od zadnje mikcije">
+					description = <"Časovni period od zadnje mikcije?">
+				>
+				["at0.6"] = <
+					text = <"Težave">
+					description = <"Ugotovljene težave glede uriniranja">
+				>
+				["at0.7"] = <
+					text = <"Opis">
+					description = <"Opis težav">
+				>
+				["at0.9"] = <
+					text = <"Stopnja težave">
+					description = <"Stopnja težave, ki se nanaša na uriniranje">
+				>
+				["at0000"] = <
+					text = <"Izločanje tekočin">
+					description = <"Podrobnosti o izločenoj tekočini iz telsa pacienta">
+				>
+				["at0000.1"] = <
+					text = <"Izločanje urina">
+					description = <"Podrobnosti o izločenem urinu">
+				>
+				["at0001"] = <
+					text = <"*Event Series(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"*The estimation of fluid output without specifying the period of time.(en)">
+				>
+				["at0003"] = <
+					text = <"*List(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0006"] = <
+					text = <"V celoti">
+					description = <"Celotna količina izločene tekočine v opazovanem časovnem intervalu">
+				>
+				["at0007"] = <
+					text = <"Aktualna">
+					description = <"Aktualna izločena količina tekočine v opazovanem časovnem intervalu">
+				>
+				["at0008"] = <
+					text = <"*List(en)">
+					description = <"*@ internal @(en)">
+				>
+				["at0016"] = <
+					text = <"Podatki o tekočini">
+					description = <"Podatki o tekočini">
+				>
+				["at0016.1"] = <
+					text = <"Podatki o urinu">
+					description = <"Podatki o urinu">
+				>
+				["at0018"] = <
+					text = <"Približno">
+					description = <"Približna ocena količine tekočine">
+				>
+				["at0019"] = <
+					text = <"Izmerjeno">
+					description = <"Izmerjena količina izločene tekočine">
+				>
+				["at0020"] = <
+					text = <"Določeno">
+					description = <"Količina izločene tekočine je bila določena">
+				>
+				["at0028"] = <
+					text = <"Naprava">
+					description = <"Podatki o napravi s katero se je merila količina izločene tekočine">
+				>
+				["at0031"] = <
+					text = <"Preciznost meritve">
+					description = <"Opombe, ki se nanašajo na preciznost izvedenih meritev">
+				>
+			>
+		>
+	>
