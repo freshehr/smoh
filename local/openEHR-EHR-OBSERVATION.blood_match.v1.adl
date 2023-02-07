@@ -1,0 +1,224 @@
+archetype (adl_version=1.4; uid=40fd9787-ef0c-34fd-b5b9-0d558cd5842f)
+	openEHR-EHR-OBSERVATION.blood_match.v1
+
+concept
+	[at0000]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["de"] = <
+			language = <[ISO_639-1::de]>
+			author = <
+				["name"] = <"Jasmin Buck, Sebastian Garde">
+				["organisation"] = <"University of Heidelberg, Central Queensland University">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["name"] = <"Sam Heard">
+		["email"] = <"sam.heard@oceaninformatics.biz">
+	>
+	lifecycle_state = <"Initial">
+	details = <
+		["de"] = <
+			language = <[ISO_639-1::de]>
+			purpose = <"Zur Dokumentation der Blutgruppe und Befunde der Antikörper">
+			keywords = <"Gruppe","Transfusion">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Dokumentiert von einem Bluttransfusion-Labor">
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record blood group and antibody findings">
+			keywords = <"group","transfusion">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			use = <"Reporting by blood transfusion laboratory">
+		>
+	>
+	other_details = <
+		["references"] = <"null">
+		["MD5-CAM-1.0.1"] = <"65eab1e313992cd6b40c56ff37fa650b">
+		["build_uid"] = <"8be43f42-1d61-32f0-a820-cb7279a16504">
+	>
+
+definition
+	OBSERVATION[at0000] matches {    -- Blood matching
+		data matches {
+			HISTORY[at0001] matches {    -- Event Series
+				events cardinality matches {1..*; unordered} matches {
+					POINT_EVENT[at0002] occurrences matches {0..1} matches {    -- Any event
+						data matches {
+							ITEM_TREE[at0003] matches {    -- Tree
+								items cardinality matches {0..*; unordered} matches {
+									ELEMENT[at0004] matches {    -- ABO
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0005] occurrences matches {0..1} matches {    -- Rhesus
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+									ELEMENT[at0009] occurrences matches {0..1} matches {    -- Antibodies detected
+										value matches {
+											DV_BOOLEAN matches {*}
+										}
+									}
+									CLUSTER[at0008] occurrences matches {0..*} matches {    -- Antibodies
+										items cardinality matches {0..*; unordered} matches {
+											ELEMENT[at0006] occurrences matches {0..1} matches {    -- Antibody
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+											ELEMENT[at0007] occurrences matches {0..1} matches {    -- Details
+												value matches {
+													DV_TEXT matches {*}
+												}
+											}
+										}
+									}
+									ELEMENT[at0010] occurrences matches {0..1} matches {    -- Overall comment
+										value matches {
+											DV_TEXT matches {*}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		protocol matches {
+			ITEM_LIST[at0011] matches {    -- List
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0012] occurrences matches {0..1} matches {    -- Method
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["de"] = <
+			items = <
+				["at0000"] = <
+					text = <"Blutgruppe">
+					description = <"Informationen zur Blutgruppe, einschließlich AB0, Rhesus, Antikörper, usw.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"Generic event">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@internal @">
+				>
+				["at0004"] = <
+					text = <"AB0">
+					description = <"Informationen zur AB0 Blutgruppe">
+				>
+				["at0005"] = <
+					text = <"Rhesus">
+					description = <"Informationen zur Rhesus Blutgruppe">
+				>
+				["at0006"] = <
+					text = <"Antikörper">
+					description = <"Die Art der Antikörper">
+				>
+				["at0007"] = <
+					text = <"Einzelheiten">
+					description = <"Einzelheiten zu den Antikörpern">
+				>
+				["at0008"] = <
+					text = <"Antikörper">
+					description = <"Bestimmung oder Befund eines Antikörpers">
+				>
+				["at0009"] = <
+					text = <"Antikörper ermittelt">
+					description = <"Antikörper wurden ermittelt">
+				>
+				["at0010"] = <
+					text = <"Allgemeine Bemerkung">
+					description = <"Bemerkung zum gesamten Befund">
+				>
+				["at0011"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0012"] = <
+					text = <"Methode">
+					description = <"Die Methode des Matching/Zuordnung">
+				>
+			>
+		>
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Blood matching">
+					description = <"Blood group information including ABO, Rhesus and antibodies etc.">
+				>
+				["at0001"] = <
+					text = <"Event Series">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Any event">
+					description = <"Generic event">
+				>
+				["at0003"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0004"] = <
+					text = <"ABO">
+					description = <"ABO blood group information">
+				>
+				["at0005"] = <
+					text = <"Rhesus">
+					description = <"Rhesus blood group information">
+				>
+				["at0006"] = <
+					text = <"Antibody">
+					description = <"The nature of the antibody">
+				>
+				["at0007"] = <
+					text = <"Details">
+					description = <"Details about the antibody">
+				>
+				["at0008"] = <
+					text = <"Antibodies">
+					description = <"Grouping of findings relating to one antibody">
+				>
+				["at0009"] = <
+					text = <"Antibodies detected">
+					description = <"Antibodies have been detected">
+				>
+				["at0010"] = <
+					text = <"Overall comment">
+					description = <"Comment on the findings overall">
+				>
+				["at0011"] = <
+					text = <"List">
+					description = <"@ internal @">
+				>
+				["at0012"] = <
+					text = <"Method">
+					description = <"The method of matching">
+				>
+			>
+		>
+	>
