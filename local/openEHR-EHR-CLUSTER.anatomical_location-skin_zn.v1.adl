@@ -1,0 +1,1005 @@
+archetype (adl_version=1.4; uid=e013dc5b-6201-391d-8da3-a6a3564ca462)
+	openEHR-EHR-CLUSTER.anatomical_location-skin_zn.v1
+specialize
+	openEHR-EHR-CLUSTER.anatomical_location.v1
+
+concept
+	[at0000.1]
+
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+			author = <
+				["name"] = <"Biljana Princic">
+			>
+		>
+	>
+
+description
+	original_author = <
+		["date"] = <"10/11/2008">
+		["name"] = <"Heather Leslie">
+		["organisation"] = <"Ocean Informatics">
+		["email"] = <"heather.leslie@oceaninformatics.com">
+	>
+	lifecycle_state = <"AuthorDraft">
+	details = <
+		["sl"] = <
+			language = <[ISO_639-1::sl]>
+		>
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record details about anatomical location.">
+			keywords = <"location","site","anatomical">
+			copyright = <"copyright (c) 2010 openEHR Foundation">
+			misuse = <"Not for specifiying unilateral/bilateral occurence - this is related to an evaluation which perhaps includes multiple locations.">
+		>
+	>
+	other_details = <
+		["references"] = <"Use cases:
+
+- 5LICS, midclavicular line
+
+- L forearm, 2cm anterior to the cubital fossa
+
+- Right iliac fossa
+
+- 5 cm below L tibial tuberosity
+
+- 2 cm medial to R nipple
+
+- 4 cm below R costal margin in midclavicular line
+
+- R femur
+
+- midline nose
+
+- medial aspect of R great toe nail.">
+		["MD5-CAM-1.0.1"] = <"8B484094294481001471D65C9643EAC2">
+		["build_uid"] = <"4479fc49-e82a-3afe-b7ee-810ba0286e30">
+	>
+
+definition
+	CLUSTER[at0000.1] matches {    -- Skin location
+		items cardinality matches {1..*; unordered} matches {
+			CLUSTER[at0005] occurrences matches {0..1} matches {    -- Specific location
+				items cardinality matches {1..*; unordered} matches {
+					ELEMENT[at0001.1] occurrences matches {0..1} matches {    -- Skin location
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0.55,    -- Thorax
+									at0.56,    -- Back
+									at0.57,    -- Upper back
+									at0.58,    -- Lower back
+									at0.59,    -- Neck
+									at0.60,    -- Abdomen
+									at0.61,    -- Nose
+									at0.62,    -- Head
+									at0.63,    -- Occiput
+									at0.64,    -- Vertex
+									at0.65,    -- Scalp
+									at0.66,    -- Lips
+									at0.67,    -- Upper lip
+									at0.68,    -- Lower lip
+									at0.69,    -- Forehead
+									at0.70,    -- Chin
+									at0.71,    -- Ano-genital area
+									at0.72,    -- Axilla
+									at0.73,    -- Entire arm
+									at0.74,    -- Upper arm
+									at0.75,    -- Lower arm
+									at0.76,    -- Palm
+									at0.77,    -- Fingers
+									at0.78,    -- Buttock
+									at0.79,    -- Entire leg
+									at0.80,    -- Upper leg
+									at0.81,    -- Lower leg
+									at0.82,    -- Instep
+									at0.83,    -- Sole
+									at0.84,    -- Heel
+									at0.85,    -- Toes
+									at0.86,    -- Eyelids
+									at0.87,    -- Upper eyelid
+									at0.88,    -- Lower eyelid
+									at0.89,    -- Cheek
+									at0.90,    -- Ear
+									at0.94]    -- Whole body
+								}
+							}
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0002] occurrences matches {0..1} matches {    -- Side
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0003,    -- Left
+									at0004,    -- Right
+									at0051]    -- Bilateral
+								}
+							}
+						}
+					}
+					ELEMENT[at0.54] occurrences matches {0..1} matches {    -- Frontal aspect
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0.91,    -- Anterior
+									at0.92,    -- Posterior
+									at0.93]    -- Anterior and posterior
+								}
+							}
+						}
+					}
+					ELEMENT[at0028] occurrences matches {0..1} matches {    -- Numerical identifier
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0029,    -- First
+									at0030,    -- Second
+									at0031,    -- Third
+									at0032,    -- Fourth
+									at0033,    -- Fifth
+									at0034,    -- Sixth
+									at0035,    -- Seventh
+									at0036,    -- Eighth
+									at0037,    -- Ninth
+									at0038,    -- Tenth
+									at0039,    -- Eleventh
+									at0040,    -- Twelfth
+									at0041,    -- Thirteenth
+									at0042,    -- Fourteenth
+									at0043,    -- Fifteenth
+									at0044,    -- Sixteenth
+									at0045,    -- Seventeenth
+									at0046]    -- Eighteenth
+								}
+							}
+						}
+					}
+					ELEMENT[at0024] occurrences matches {0..1} matches {    -- Anatomical plane
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0011,    -- Midline
+									at0025,    -- Midclavicular line
+									at0026,    -- Midaxillary line
+									at0027]    -- Midscapular line
+								}
+							}
+						}
+					}
+				}
+			}
+			CLUSTER[at0020] occurrences matches {0..*} matches {    -- Relative location
+				items cardinality matches {1..*; unordered} matches {
+					ELEMENT[at0021] occurrences matches {0..1} matches {    -- Identified landmark
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0006] occurrences matches {0..1} matches {    -- Aspect
+						value matches {
+							DV_CODED_TEXT matches {
+								defining_code matches {
+									[local::
+									at0007,    -- Medial to
+									at0008,    -- Lateral to
+									at0009,    -- Superior to
+									at0010,    -- Inferior to
+									at0012,    -- Anterior to
+									at0013,    -- Posterior to
+									at0014,    -- Below
+									at0015,    -- Above
+									at0016,    -- Inferolateral to
+									at0017,    -- Superolateral to
+									at0018,    -- Inferomedial to
+									at0019]    -- Superomedial to
+								}
+							}
+						}
+					}
+					ELEMENT[at0022] occurrences matches {0..1} matches {    -- Distance from landmark
+						value matches {
+							C_DV_QUANTITY <
+								property = <[openehr::122]>
+								list = <
+									["1"] = <
+										units = <"cm">
+									>
+									["2"] = <
+										units = <"in">
+									>
+									["3"] = <
+										units = <"ft">
+									>
+									["4"] = <
+										units = <"mm">
+									>
+								>
+							>
+						}
+					}
+				}
+			}
+			ELEMENT[at0023] occurrences matches {0..*} matches {    -- Description
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0053] occurrences matches {0..*} matches {    -- Visual markings/orientation
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0052] occurrences matches {0..*} matches {    -- Image
+				value matches {
+					DV_MULTIMEDIA matches {*}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0.54"] = <
+					text = <"Frontal aspect">
+					description = <"Location on the anterior or posterior aspect of the body.">
+				>
+				["at0.55"] = <
+					text = <"Thorax">
+					description = <"*">
+				>
+				["at0.56"] = <
+					text = <"Back">
+					description = <"*">
+				>
+				["at0.57"] = <
+					text = <"Upper back">
+					description = <"*">
+				>
+				["at0.58"] = <
+					text = <"Lower back">
+					description = <"*">
+				>
+				["at0.59"] = <
+					text = <"Neck">
+					description = <"*">
+				>
+				["at0.60"] = <
+					text = <"Abdomen">
+					description = <"*">
+				>
+				["at0.61"] = <
+					text = <"Nose">
+					description = <"*">
+				>
+				["at0.62"] = <
+					text = <"Head">
+					description = <"*">
+				>
+				["at0.63"] = <
+					text = <"Occiput">
+					description = <"*">
+				>
+				["at0.64"] = <
+					text = <"Vertex">
+					description = <"*">
+				>
+				["at0.65"] = <
+					text = <"Scalp">
+					description = <"*">
+				>
+				["at0.66"] = <
+					text = <"Lips">
+					description = <"*">
+				>
+				["at0.67"] = <
+					text = <"Upper lip">
+					description = <"*">
+				>
+				["at0.68"] = <
+					text = <"Lower lip">
+					description = <"*">
+				>
+				["at0.69"] = <
+					text = <"Forehead">
+					description = <"*">
+				>
+				["at0.70"] = <
+					text = <"Chin">
+					description = <"*">
+				>
+				["at0.71"] = <
+					text = <"Ano-genital area">
+					description = <"*">
+				>
+				["at0.72"] = <
+					text = <"Axilla">
+					description = <"*">
+				>
+				["at0.73"] = <
+					text = <"Entire arm">
+					description = <"*">
+				>
+				["at0.74"] = <
+					text = <"Upper arm">
+					description = <"*">
+				>
+				["at0.75"] = <
+					text = <"Lower arm">
+					description = <"*">
+				>
+				["at0.76"] = <
+					text = <"Palm">
+					description = <"*">
+				>
+				["at0.77"] = <
+					text = <"Fingers">
+					description = <"*">
+				>
+				["at0.78"] = <
+					text = <"Buttock">
+					description = <"*">
+				>
+				["at0.79"] = <
+					text = <"Entire leg">
+					description = <"*">
+				>
+				["at0.80"] = <
+					text = <"Upper leg">
+					description = <"*">
+				>
+				["at0.81"] = <
+					text = <"Lower leg">
+					description = <"*">
+				>
+				["at0.82"] = <
+					text = <"Instep">
+					description = <"*">
+				>
+				["at0.83"] = <
+					text = <"Sole">
+					description = <"*">
+				>
+				["at0.84"] = <
+					text = <"Heel">
+					description = <"*">
+				>
+				["at0.85"] = <
+					text = <"Toes">
+					description = <"*">
+				>
+				["at0.86"] = <
+					text = <"Eyelids">
+					description = <"*">
+				>
+				["at0.87"] = <
+					text = <"Upper eyelid">
+					description = <"*">
+				>
+				["at0.88"] = <
+					text = <"Lower eyelid">
+					description = <"*">
+				>
+				["at0.89"] = <
+					text = <"Cheek">
+					description = <"*">
+				>
+				["at0.90"] = <
+					text = <"Ear">
+					description = <"*">
+				>
+				["at0.91"] = <
+					text = <"Anterior">
+					description = <"Skin on the ventral aspect of the body.">
+				>
+				["at0.92"] = <
+					text = <"Posterior">
+					description = <"On the dorsal aspect of the body.">
+				>
+				["at0.93"] = <
+					text = <"Anterior and posterior">
+					description = <"*">
+				>
+				["at0.94"] = <
+					text = <"Whole body">
+					description = <"*">
+				>
+				["at0000"] = <
+					text = <"Anatomical location">
+					description = <"Record details about an anatomical location.">
+				>
+				["at0000.1"] = <
+					text = <"Skin location">
+					description = <"Record details about skin location">
+				>
+				["at0001"] = <
+					text = <"Name of location">
+					description = <"Named anatomical location - ideally would be coded where possible.">
+				>
+				["at0001.1"] = <
+					text = <"Skin location">
+					description = <"Named anatomical location - ideally would be coded where possible.">
+				>
+				["at0002"] = <
+					text = <"Side">
+					description = <"Specify lateraility of the anatomical location.">
+				>
+				["at0003"] = <
+					text = <"Left">
+					description = <"Left laterality.">
+				>
+				["at0004"] = <
+					text = <"Right">
+					description = <"Right laterality.">
+				>
+				["at0005"] = <
+					text = <"Specific location">
+					description = <"Specific and identified anatomical location.">
+				>
+				["at0006"] = <
+					text = <"Aspect">
+					description = <"Qualifier to identify which direction the anatomical location is in relation to the identified landmark.">
+				>
+				["at0007"] = <
+					text = <"Medial to">
+					description = <"Relative location medial to the landmark.">
+				>
+				["at0008"] = <
+					text = <"Lateral to">
+					description = <"Relative location lateral to the landmark.">
+				>
+				["at0009"] = <
+					text = <"Superior to">
+					description = <"Relative location superior to the landmark.">
+				>
+				["at0010"] = <
+					text = <"Inferior to">
+					description = <"Relative location inferior to the landmark.">
+				>
+				["at0011"] = <
+					text = <"Midline">
+					description = <"In the sagittal plane passing through the midline of the body.">
+				>
+				["at0012"] = <
+					text = <"Anterior to">
+					description = <"Relative location anterior to the landmark.">
+				>
+				["at0013"] = <
+					text = <"Posterior to">
+					description = <"Relative location posterior to the landmark.">
+				>
+				["at0014"] = <
+					text = <"Below">
+					description = <"Relative location below the landmark.">
+				>
+				["at0015"] = <
+					text = <"Above">
+					description = <"Relative location above the landmark.">
+				>
+				["at0016"] = <
+					text = <"Inferolateral to">
+					description = <"Relative location inferior and medial to the landmark.">
+				>
+				["at0017"] = <
+					text = <"Superolateral to">
+					description = <"Relative location superior and lateral to the landmark.">
+				>
+				["at0018"] = <
+					text = <"Inferomedial to">
+					description = <"Relative location inferior and medial to the landmark.">
+				>
+				["at0019"] = <
+					text = <"Superomedial to">
+					description = <"Relative location superior and medial to the landmark.">
+				>
+				["at0020"] = <
+					text = <"Relative location">
+					description = <"Qualifiers to identify non-specific location eg 5cm (distance) inferior (aspect) to the tibial tuberosity (landmark).  There may be more than one relative location required to provide a cross reference.">
+				>
+				["at0021"] = <
+					text = <"Identified landmark">
+					description = <"Identified anatomical landmark from which to specify relative anatomical location.">
+				>
+				["at0022"] = <
+					text = <"Distance from landmark">
+					description = <"Distance of location from the identified landmark.">
+				>
+				["at0023"] = <
+					text = <"Description">
+					description = <"Description of anatomical location.">
+				>
+				["at0024"] = <
+					text = <"Anatomical plane">
+					description = <"Line describing the position of a vertical anatomical plane in the body.">
+				>
+				["at0025"] = <
+					text = <"Midclavicular line">
+					description = <"In the sagittal plane passing through mid-clavical.">
+				>
+				["at0026"] = <
+					text = <"Midaxillary line">
+					description = <"In the coronal plane passing through mid-axilla.">
+				>
+				["at0027"] = <
+					text = <"Midscapular line">
+					description = <"In the sagittal plane passing through mid-scapula.">
+				>
+				["at0028"] = <
+					text = <"Numerical identifier">
+					description = <"Identify the specific anatomical site out of multiple eg tenth rib; fourth vertebra; second toe.">
+				>
+				["at0029"] = <
+					text = <"First">
+					description = <"Ordinal position 1 of an anatomical location.">
+				>
+				["at0030"] = <
+					text = <"Second">
+					description = <"Ordinal position 2 of an anatomical location.">
+				>
+				["at0031"] = <
+					text = <"Third">
+					description = <"Ordinal position 3 of an anatomical location.">
+				>
+				["at0032"] = <
+					text = <"Fourth">
+					description = <"Ordinal position 4 of an anatomical location.">
+				>
+				["at0033"] = <
+					text = <"Fifth">
+					description = <"Ordinal position 5 of an anatomical location.">
+				>
+				["at0034"] = <
+					text = <"Sixth">
+					description = <"Ordinal position 6 of an anatomical location.">
+				>
+				["at0035"] = <
+					text = <"Seventh">
+					description = <"Ordinal position 7 of an anatomical location.">
+				>
+				["at0036"] = <
+					text = <"Eighth">
+					description = <"Ordinal position 8 of an anatomical location.">
+				>
+				["at0037"] = <
+					text = <"Ninth">
+					description = <"Ordinal position 9 of an anatomical location.">
+				>
+				["at0038"] = <
+					text = <"Tenth">
+					description = <"Ordinal position 10 of an anatomical location.">
+				>
+				["at0039"] = <
+					text = <"Eleventh">
+					description = <"Ordinal position 11 of an anatomical location.">
+				>
+				["at0040"] = <
+					text = <"Twelfth">
+					description = <"Ordinal position 12 of an anatomical location.">
+				>
+				["at0041"] = <
+					text = <"Thirteenth">
+					description = <"Ordinal position 13 of an anatomical location.">
+				>
+				["at0042"] = <
+					text = <"Fourteenth">
+					description = <"Ordinal position 14 of an anatomical location.">
+				>
+				["at0043"] = <
+					text = <"Fifteenth">
+					description = <"Ordinal position 15 of an anatomical location.">
+				>
+				["at0044"] = <
+					text = <"Sixteenth">
+					description = <"Ordinal position 16 of an anatomical location.">
+				>
+				["at0045"] = <
+					text = <"Seventeenth">
+					description = <"Ordinal position 17 of an anatomical location.">
+				>
+				["at0046"] = <
+					text = <"Eighteenth">
+					description = <"Ordinal position 18 of an anatomical location.">
+				>
+				["at0051"] = <
+					text = <"Bilateral">
+					description = <"Both left and right.">
+				>
+				["at0052"] = <
+					text = <"Image">
+					description = <"Image or images used to identify a location.">
+				>
+				["at0053"] = <
+					text = <"Visual markings/orientation">
+					description = <"Description of any visual markings used to orientate the viewer e.g external reference points, special sutures, ink markings.">
+				>
+			>
+		>
+		["sl"] = <
+			items = <
+				["at0.54"] = <
+					text = <"Pogled">
+					description = <"*Location on the anterior or posterior aspect of the body.(en)">
+				>
+				["at0.55"] = <
+					text = <"Prsni koš">
+					description = <"*(en)">
+				>
+				["at0.56"] = <
+					text = <"Hrbet">
+					description = <"*(en)">
+				>
+				["at0.57"] = <
+					text = <"Hrbet zgoraj">
+					description = <"*(en)">
+				>
+				["at0.58"] = <
+					text = <"Hrbet spodaj">
+					description = <"*(en)">
+				>
+				["at0.59"] = <
+					text = <"Vrat">
+					description = <"*(en)">
+				>
+				["at0.60"] = <
+					text = <"Trebuh">
+					description = <"*(en)">
+				>
+				["at0.61"] = <
+					text = <"Nos">
+					description = <"*(en)">
+				>
+				["at0.62"] = <
+					text = <"Glava">
+					description = <"*(en)">
+				>
+				["at0.63"] = <
+					text = <"Tilnik">
+					description = <"*(en)">
+				>
+				["at0.64"] = <
+					text = <"Teme">
+					description = <"*(en)">
+				>
+				["at0.65"] = <
+					text = <"Lasišče">
+					description = <"*(en)">
+				>
+				["at0.66"] = <
+					text = <"Ustnice">
+					description = <"*(en)">
+				>
+				["at0.67"] = <
+					text = <"Zgornja ustnica">
+					description = <"*(en)">
+				>
+				["at0.68"] = <
+					text = <"Spodnja ustnica">
+					description = <"*(en)">
+				>
+				["at0.69"] = <
+					text = <"Čelo">
+					description = <"*(en)">
+				>
+				["at0.70"] = <
+					text = <"Brada">
+					description = <"*(en)">
+				>
+				["at0.71"] = <
+					text = <"Anogenitalni del">
+					description = <"*(en)">
+				>
+				["at0.72"] = <
+					text = <"Podpazduha">
+					description = <"*(en)">
+				>
+				["at0.73"] = <
+					text = <"Vsa roka">
+					description = <"*(en)">
+				>
+				["at0.74"] = <
+					text = <"Roka zgoraj">
+					description = <"*(en)">
+				>
+				["at0.75"] = <
+					text = <"Roka spodaj">
+					description = <"*(en)">
+				>
+				["at0.76"] = <
+					text = <"Dlan">
+					description = <"*(en)">
+				>
+				["at0.77"] = <
+					text = <"Prsti">
+					description = <"*(en)">
+				>
+				["at0.78"] = <
+					text = <"Ritnica">
+					description = <"*(en)">
+				>
+				["at0.79"] = <
+					text = <"Vsa noga">
+					description = <"*(en)">
+				>
+				["at0.80"] = <
+					text = <"Noga zgoraj">
+					description = <"*(en)">
+				>
+				["at0.81"] = <
+					text = <"Noga spodaj">
+					description = <"*(en)">
+				>
+				["at0.82"] = <
+					text = <"Nart">
+					description = <"*(en)">
+				>
+				["at0.83"] = <
+					text = <"Podplat">
+					description = <"*(en)">
+				>
+				["at0.84"] = <
+					text = <"Peta">
+					description = <"*(en)">
+				>
+				["at0.85"] = <
+					text = <"Prsti na nogah">
+					description = <"*(en)">
+				>
+				["at0.86"] = <
+					text = <"Obe veki">
+					description = <"*(en)">
+				>
+				["at0.87"] = <
+					text = <"Zgornja veka">
+					description = <"*(en)">
+				>
+				["at0.88"] = <
+					text = <"Spodnja veka">
+					description = <"*(en)">
+				>
+				["at0.89"] = <
+					text = <"Lica">
+					description = <"*(en)">
+				>
+				["at0.90"] = <
+					text = <"Uho">
+					description = <"*(en)">
+				>
+				["at0.91"] = <
+					text = <"Spredaj">
+					description = <"*Skin on the ventral aspect of the body.(en)">
+				>
+				["at0.92"] = <
+					text = <"Zadaj">
+					description = <"*On the dorsal aspect of the body.(en)">
+				>
+				["at0.93"] = <
+					text = <"Spredaj in zadaj">
+					description = <"*">
+				>
+				["at0.94"] = <
+					text = <"Celo telo">
+					description = <"*">
+				>
+				["at0000"] = <
+					text = <"Anatmoska lokacija">
+					description = <"Anatomski opis lokacije na telesu oz. pozicije telesa ">
+				>
+				["at0000.1"] = <
+					text = <"Lokacija">
+					description = <"*Record details about skin location(en)">
+				>
+				["at0001"] = <
+					text = <"Naziv">
+					description = <"Naziv anatomske lokacije">
+				>
+				["at0001.1"] = <
+					text = <"Naziv">
+					description = <"*Named anatomical location - ideally would be coded where possible.(en)">
+				>
+				["at0002"] = <
+					text = <"Stran telesa">
+					description = <"Opis določeni strani telesa">
+				>
+				["at0003"] = <
+					text = <"Leva stran">
+					description = <"Leva stran">
+				>
+				["at0004"] = <
+					text = <"Desna stran">
+					description = <"Desna stran">
+				>
+				["at0005"] = <
+					text = <"Lokacija (točno mesto)">
+					description = <"Točna anatomska lokacija / točka /predel na telesu">
+				>
+				["at0006"] = <
+					text = <"Pogled">
+					description = <"*Qualifier to identify which direction the anatomical location is in relation to the identified landmark.(en)">
+				>
+				["at0007"] = <
+					text = <"Srednji">
+					description = <"*Relative location medial to the landmark.(en)">
+				>
+				["at0008"] = <
+					text = <"Stranski">
+					description = <"*Relative location lateral to the landmark.(en)">
+				>
+				["at0009"] = <
+					text = <"Višje">
+					description = <"*Relative location superior to the landmark.(en)">
+				>
+				["at0010"] = <
+					text = <"Nižje">
+					description = <"*Relative location inferior to the landmark.(en)">
+				>
+				["at0011"] = <
+					text = <"V sredini">
+					description = <"*In the sagittal plane passing through the midline of the body.(en)">
+				>
+				["at0012"] = <
+					text = <"Spredaj">
+					description = <"*Relative location anterior to the landmark.(en)">
+				>
+				["at0013"] = <
+					text = <"Zadaj">
+					description = <"*Relative location posterior to the landmark.(en)">
+				>
+				["at0014"] = <
+					text = <"Spodaj">
+					description = <"*Relative location below the landmark.(en)">
+				>
+				["at0015"] = <
+					text = <"Zgoraj">
+					description = <"*Relative location above the landmark.(en)">
+				>
+				["at0016"] = <
+					text = <"Nižje ob strani">
+					description = <"*Relative location inferior and medial to the landmark.(en)">
+				>
+				["at0017"] = <
+					text = <"Višje ob strani">
+					description = <"*Relative location superior and lateral to the landmark.(en)">
+				>
+				["at0018"] = <
+					text = <"Nižje v sredini">
+					description = <"*Relative location inferior and medial to the landmark.(en)">
+				>
+				["at0019"] = <
+					text = <"Višje v sredini">
+					description = <"*Relative location superior and medial to the landmark.(en)">
+				>
+				["at0020"] = <
+					text = <"Približna lokacija">
+					description = <"*Qualifiers to identify non-specific location eg 5cm (distance) inferior (aspect) to the tibial tuberosity (landmark).  There may be more than one relative location required to provide a cross reference.(en)">
+				>
+				["at0021"] = <
+					text = <"Točka orientacije">
+					description = <"*Identified anatomical landmark from which to specify relative anatomical location.(en)">
+				>
+				["at0022"] = <
+					text = <"Razdalja od označene lokacije">
+					description = <"*Distance of location from the identified landmark.(en)">
+				>
+				["at0023"] = <
+					text = <"Opis">
+					description = <"*Description of anatomical location.(en)">
+				>
+				["at0024"] = <
+					text = <"*Anatomical plane(en)">
+					description = <"*Line describing the position of a vertical anatomical plane in the body.(en)">
+				>
+				["at0025"] = <
+					text = <"*Midclavicular line(en)">
+					description = <"*In the sagittal plane passing through mid-clavical.(en)">
+				>
+				["at0026"] = <
+					text = <"*Midaxillary line(en)">
+					description = <"*In the coronal plane passing through mid-axilla.(en)">
+				>
+				["at0027"] = <
+					text = <"*Midscapular line(en)">
+					description = <"*In the sagittal plane passing through mid-scapula.(en)">
+				>
+				["at0028"] = <
+					text = <"Numerični ID">
+					description = <"*Identify the specific anatomical site out of multiple eg tenth rib; fourth vertebra; second toe.(en)">
+				>
+				["at0029"] = <
+					text = <"Prvi">
+					description = <"*Ordinal position 1 of an anatomical location.(en)">
+				>
+				["at0030"] = <
+					text = <"Drugi">
+					description = <"*Ordinal position 2 of an anatomical location.(en)">
+				>
+				["at0031"] = <
+					text = <"Tretji">
+					description = <"*Ordinal position 3 of an anatomical location.(en)">
+				>
+				["at0032"] = <
+					text = <"Četrti">
+					description = <"*Ordinal position 4 of an anatomical location.(en)">
+				>
+				["at0033"] = <
+					text = <"Peti">
+					description = <"*Ordinal position 5 of an anatomical location.(en)">
+				>
+				["at0034"] = <
+					text = <"Šesti">
+					description = <"*Ordinal position 6 of an anatomical location.(en)">
+				>
+				["at0035"] = <
+					text = <"Sedmi">
+					description = <"*Ordinal position 7 of an anatomical location.(en)">
+				>
+				["at0036"] = <
+					text = <"Osmi">
+					description = <"*Ordinal position 8 of an anatomical location.(en)">
+				>
+				["at0037"] = <
+					text = <"Deveti">
+					description = <"*Ordinal position 9 of an anatomical location.(en)">
+				>
+				["at0038"] = <
+					text = <"deseti">
+					description = <"*Ordinal position 10 of an anatomical location.(en)">
+				>
+				["at0039"] = <
+					text = <"Enajsti">
+					description = <"*Ordinal position 11 of an anatomical location.(en)">
+				>
+				["at0040"] = <
+					text = <"Dvanajsti">
+					description = <"*Ordinal position 12 of an anatomical location.(en)">
+				>
+				["at0041"] = <
+					text = <"Trinajsti">
+					description = <"*Ordinal position 13 of an anatomical location.(en)">
+				>
+				["at0042"] = <
+					text = <"Štirinajstih">
+					description = <"*Ordinal position 14 of an anatomical location.(en)">
+				>
+				["at0043"] = <
+					text = <"Petnajsti">
+					description = <"*Ordinal position 15 of an anatomical location.(en)">
+				>
+				["at0044"] = <
+					text = <"Šestnajsti">
+					description = <"*Ordinal position 16 of an anatomical location.(en)">
+				>
+				["at0045"] = <
+					text = <"Sedamnajsti">
+					description = <"*Ordinal position 17 of an anatomical location.(en)">
+				>
+				["at0046"] = <
+					text = <"Osamnajsti">
+					description = <"*Ordinal position 18 of an anatomical location.(en)">
+				>
+				["at0051"] = <
+					text = <"Levo in desno">
+					description = <"*Both left and right.(en)">
+				>
+				["at0052"] = <
+					text = <"Fotografija">
+					description = <"*Image or images used to identify a location.(en)">
+				>
+				["at0053"] = <
+					text = <"Orientacijska točka">
+					description = <"*Description of any visual markings used to orientate the viewer e.g external reference points, special sutures, ink markings.(en)">
+				>
+			>
+		>
+	>
